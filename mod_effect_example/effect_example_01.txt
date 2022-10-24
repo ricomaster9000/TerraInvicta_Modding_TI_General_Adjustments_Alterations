@@ -1,0 +1,15 @@
+{
+    "dataName": "Effect_DaatYichudTransfer",
+    "instantEffect": "RedistributeControlPointsByPopularity_Individual",
+    "operation": "",
+    "value": 10,
+    "instantRnd": null,
+    "strValue": "",
+    "effectTarget": "InputState",
+    "effectSecondaryTarget": "InputState",
+    "effectDuration": "instant",
+    "stackable": null,
+    "duration_months": -1,
+    "initialFactionsStr": [],
+    "contexts": []
+}

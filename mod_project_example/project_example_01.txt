@@ -1,0 +1,56 @@
+{
+    "friendlyName": "Daat Yichud Full Access",
+    "dataName": "Project_DaatYichudFullAccess",
+    "techCategory": "SpaceScience",
+    "AI_techRole": "FactionObjective",
+    "AI_criticalTech": null,
+    "AI_projectRole": "Objective",
+    "researchCost": 25,
+    "prereqs": [
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "altPrereq0": "",
+    "requiredObjectiveNames": [
+        ""
+    ],
+    "altRequiredObjective0Name": "",
+    "requiredMilestone": "",
+    "effects": [
+        "",
+        "",
+        ""
+    ],
+    "oneTimeGlobally": true,
+    "repeatable": false,
+    "requiresNation": "ISR",
+    "requiredControlPoint": [
+        "CombinedIsrael",
+        ""
+    ],
+    "factionPrereq": [
+        "ResistCouncil",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "factionAvailableChance": 100,
+    "factionAlways": "",
+    "initialUnlockChance": 100,
+    "deltaUnlockChance": 0,
+    "maxUnlockChance": 100,
+    "orgGranted": "DaatYichudOrg",
+    "resourcesGranted": [
+        {
+            "resource": "",
+            "value": null
+        }
+    ],
+    "iconResource": "",
+    "completedIllustrationPath": ""
+}

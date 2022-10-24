@@ -1,0 +1,85 @@
+{
+    "dataName": "event_DaatYichudTransfer",
+    "friendlyName": "DaatYichudTransfer",
+    "illustrationResource": "illustrations/Mission_Advise",
+    "soundResource": "",
+    "requiresAliens": false,
+    "year": null,
+    "endYear": null,
+    "earliestMonth": null,
+    "latestMonth": null,
+    "reqTechDataName": "",
+    "logPublicity": "silent",
+    "alertPublicity": "silent",
+    "repeatable": "OncePerCampaign",
+    "numOptions": 1,
+    "forceEvent": false,
+    "reqEventUnlock": false,
+    "baseWeight": null,
+    "altBaseWeight": {
+        "condition": {
+            "$type": "",
+            "strIdx": "",
+            "sign": "",
+            "strValue": ""
+        },
+        "value": null
+    },
+    "monthlyWeightDelta": null,
+    "weightDeltaWhenTriggered": null,
+    "targetType": "faction",
+    "hitAllQualifyingTargets": true,
+    "firstTargetNotificationOnly": false,
+    "global_cooldown_months": 0,
+    "target_cooldown_months": 0,
+    "possibleTargetDataNames": [
+        "ResistCouncil"
+    ],
+    "targetConditions": [],
+    "targetWeightModifiers": [],
+    "secondaryStateType": "InputState",
+    "sameSecondaryForAllTargets": false,
+    "possibleSecondaryStateDataNames": [
+        "ISR"
+    ],
+    "secondaryWeightModifiers": [],
+    "eventOptions": [
+        {
+            "baseAIPreference": 1,
+            "useAIModifiers": [],
+            "outcomes": [
+                {
+                    "weight": 1,
+                    "facWtMod": [],
+                    "tarWtMod": [],
+                    "secWtMod": [],
+                    "AIFavored": null,
+                    "forceAlert": null,
+                    "effectTemplateNames": [
+                        "Effect_DaatYichudTransfer"
+                    ],
+                    "delayedEffectTemplateNames": [],
+                    "projectGrantedTemplateName": "",
+                    "orgGrantedTemplateName": "",
+                    "addNarrativeEvents": [],
+                    "removeNarrativeEvents": [],
+                    "costBuilder": {
+                        "money": null,
+                        "influence": null,
+                        "operations": "",
+                        "research": null,
+                        "boost": null,
+                        "water": "",
+                        "volatiles": "",
+                        "metals": "",
+                        "nobleMetals": "",
+                        "fissiles": "",
+                        "antimatter": "",
+                        "exotics": ""
+                    },
+                    "costMultiplier": ""
+                }
+            ]
+        }
+    ]
+}
