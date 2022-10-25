@@ -38,6 +38,11 @@ namespace TI_General_Adjustments_Alterations
             _configValues.Add("agent_follow_up_successes_decrease_chances_of_success_factor", 0.10f); // 20% increase (BASE GAME does not support this feature yet, added by mod)
             _configValues.Add("agent_follow_up_failures_decrease_chances_of_success_max_count", 5); // stop decreasing at 100% (BASE GAME does not support this feature yet, added by mod)
             _configValues.Add("agent_follow_up_failures_decrease_chances_of_success_factor", 0.15f); // 20% increase (BASE GAME does not support this feature yet, added by mod)
+
+            // mission related slider additions
+            _configValues.Add("mission_related_slider_additions_enabled", true);
+            _configValues.Add("mission_related_slider_operations_boost_modifier", 0.33f);
+
             // DEFAULT MODIFICATIONS END
 
             _configValues.Add("extended_installation_completed", false);

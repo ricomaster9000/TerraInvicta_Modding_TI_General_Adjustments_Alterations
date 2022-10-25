@@ -8,5 +8,7 @@
     "agent_follow_up_successes_decrease_chances_of_success_max_count" : 3,
     "agent_follow_up_successes_decrease_chances_of_success_factor" : 0.10,
     "faction_related_configurations_enabled" : true,
-    "faction_hab_mission_point_generation_multiplier" : 4.0
+    "faction_hab_mission_point_generation_multiplier" : 4.0,
+    "mission_related_slider_additions_enabled" : true,
+    "mission_related_slider_operations_boost_modifier": 0.33
 }

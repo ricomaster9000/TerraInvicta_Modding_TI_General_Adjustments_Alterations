@@ -37,7 +37,7 @@
       <HintPath>import\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Steam\steamapps\common\Terra Invicta\TerraInvicta_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\Terra Invicta\TerraInvicta_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>import\Newtonsoft.Json.dll</HintPath>
@@ -71,8 +71,12 @@
   <ItemGroup>
     <Compile Include="adjustments_alterations\harmonypatches\factionstate\MissionControlContributionFromHabs_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\LoadGameOrStartGame_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\missionrelated\AssignCouncilorToMissionExecute_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\missionrelated\DefenseMissionCostModifier.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\FollowUpFailureModifier.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\FollowUpSuccessModifier.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\missionrelated\GetPossibleMissionList_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\missionrelated\StartMissionPhase_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\nationstate\TINationStateHelper.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\TIMissionResolutionPatch.cs" />

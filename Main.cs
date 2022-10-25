@@ -4,10 +4,13 @@ using System.IO;
 using System.Linq;
 using HarmonyLib;
 using PavonisInteractive.TerraInvicta;
+using PavonisInteractive.TerraInvicta.Actions;
+using TI_Balancer.adjustments_alterations.harmonypatches.missionrelated;
 using TI_General_Adjustments_Alterations.adjustment_alterations.core.missionrelated;
 using TI_General_Adjustments_Alterations.adjustment_alterations.core.regionstate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.factionstate;
+using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.missionrelated;
 using UnityEngine;
 using UnityModManagerNet;
 // ReSharper disable All
@@ -24,6 +27,10 @@ namespace TI_General_Adjustments_Alterations
             mod = modEntry;
             modEntry.OnToggle = OnToggle;
             Config.LoadValues();
+            if (Config.IsDebugModeActive())
+            {
+                PrintOutAllGameAssemblyMethods();
+            }
 
             bool gameHasBeenUpdatedRerunExtendedInstall = false;
             if (Config.GetValue<bool>("extended_installation_completed"))
@@ -85,9 +92,15 @@ namespace TI_General_Adjustments_Alterations
                 harmony.Patch(original6, null, new HarmonyMethod(postfix6));
             }
 
-            if (Config.IsDebugModeActive())
+            if (Config.GetValue<bool>("mission_related_slider_additions_enabled"))
             {
-                PrintOutAllGameAssemblyMethods();
+                var original = typeof(AssignCouncilorToMission).GetMethod("Execute");
+                var postfix = typeof(AssignCouncilorToMission_Patch).GetMethod("Execute_MissionSliderAdjustments_PostFix");
+                harmony.Patch(original, null, new HarmonyMethod(postfix));
+    
+                var original2 = typeof(TICouncilorState).GetMethod("GetPossibleMissionList");
+                var postfix2 = typeof(GetPossibleMissionList_Patch).GetMethod("GetPossibleMissionList_MissionSliderAdjustments_Postfix");
+                harmony.Patch(original2, null, new HarmonyMethod(postfix2));
             }
             return true;
         }
@@ -107,17 +120,20 @@ namespace TI_General_Adjustments_Alterations
 
         private static void PrintOutAllGameAssemblyMethods()
         {
-            foreach (var method in typeof(TINationState).GetMethods())
+            foreach (var method in typeof(TIFactionState).GetMethods())
             {
-                var parameters = method.GetParameters();
-                var parameterDescriptions = string.Join(", ", method.GetParameters()
-                    .Select(x => x.ParameterType + " " + x.Name)
-                    .ToArray());
+                try
+                {
+                    var parameters = method.GetParameters();
+                    var parameterDescriptions = string.Join(", ", method.GetParameters()
+                        .Select(x => x.ParameterType + " " + x.Name)
+                        .ToArray());
 
-                Console.WriteLine("{0} {1} ({2})",
-                    method.ReturnType,
-                    method.Name,
-                    parameterDescriptions);
+                    Console.WriteLine("{0} {1} ({2})",
+                        method.ReturnType,
+                        method.Name,
+                        parameterDescriptions);
+                } catch(Exception e) {}
             }
         }
 
@@ -130,6 +146,18 @@ namespace TI_General_Adjustments_Alterations
             var assetLoaderInitializeOriginal = typeof(AssetLoader).GetMethod("Initialize");
             var assetLoaderInitializePrefix = typeof(LoadGameOrStartGame_Patch).GetMethod("AssetLoad_Initialize_Prefix");
             harmony.Patch(assetLoaderInitializeOriginal, new HarmonyMethod(assetLoaderInitializePrefix));
+
+            var startMissionPhaseOriginal = typeof(CouncilorMissionCanvasController).GetMethod("StartMissionPhase");
+            var startMissionPhasePrefix = typeof(StartMissionPhase_Patch).GetMethod("Prefix");
+            harmony.Patch(startMissionPhaseOriginal, new HarmonyMethod(startMissionPhasePrefix));
+        }
+
+        public static void logDebug(string log)
+        {
+            if (Config.IsDebugModeActive())
+            {
+                Console.WriteLine("TI_General_Adjustments_Alterations: " + log);
+            }
         }
         
         

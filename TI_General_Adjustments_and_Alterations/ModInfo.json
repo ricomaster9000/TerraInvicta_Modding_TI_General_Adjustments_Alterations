@@ -5,7 +5,7 @@
     "Author": "ModMaster9000",
     "ModURL": "https://steamcommunity.com/sharedfiles/filedetails/?id=2873851670",
     "Description": "General Adjustments&Alterations",
-    "Version": "0.1.2",
+    "Version": "0.1.7",
     "ManagerVersion": "0.25.0.0",
     "AssemblyName": "TI_General_Adjustments_Alterations.dll",
     "EntryMethod": "TI_General_Adjustments_Alterations.Main.Load"
