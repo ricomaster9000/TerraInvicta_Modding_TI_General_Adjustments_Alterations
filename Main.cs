@@ -9,6 +9,7 @@ using TI_Balancer.adjustments_alterations.harmonypatches.missionrelated;
 using TI_General_Adjustments_Alterations.adjustment_alterations.core.missionrelated;
 using TI_General_Adjustments_Alterations.adjustment_alterations.core.regionstate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches;
+using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.councilorstate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.factionstate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.missionrelated;
 using UnityEngine;
@@ -33,14 +34,15 @@ namespace TI_General_Adjustments_Alterations
             }
 
             bool gameHasBeenUpdatedRerunExtendedInstall = false;
-            if (Config.GetValue<bool>("extended_installation_completed"))
+            if (Config.GetValueAsBool("extended_installation_completed"))
             {
                 long originalSize = new System.IO.FileInfo(Path.GetFullPath("TerraInvicta_Data\\Managed\\Assembly-CSharp.dll")).Length;
-                int extendSize = Config.GetValue<int>("extended_installation_main_dll_file_size");
+                int extendSize = Config.GetValueAsInt("extended_installation_main_dll_file_size");
                 gameHasBeenUpdatedRerunExtendedInstall = originalSize != extendSize;
             }
 
-            if (!Config.GetValue<bool>("extended_installation_completed") || gameHasBeenUpdatedRerunExtendedInstall)
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing2");
+            if (!Config.GetValueAsBool("extended_installation_completed") || gameHasBeenUpdatedRerunExtendedInstall)
             {
                 var psi = new ProcessStartInfo();
                 psi.CreateNoWindow = true;
@@ -54,20 +56,24 @@ namespace TI_General_Adjustments_Alterations
                 Console.WriteLine("TI_General_Adjustments_Alterations -> running EXTENDED_INTALL.bat, game needs to restart");
                 Application.Quit(0);
             }
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing3");
 
             harmony = new Harmony(modEntry.Info.Id);
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing4");
 
             applyGameStateListenerPatches(harmony);
 
-            if (Config.GetValue<bool>("nuclear_barrage_related_configurations_enabled"))
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing5");
+            if (Config.GetValueAsBool("nuclear_barrage_related_configurations_enabled"))
             {
                 var original = typeof(TIRegionState).GetMethod("ApplyDamageToRegion");
                 var prefix = typeof(ApplyDamageToRegionPatch).GetMethod("Prefix");
                 var postfix = typeof(ApplyDamageToRegionPatch).GetMethod("Postfix");
                 harmony.Patch(original, new HarmonyMethod(prefix), new HarmonyMethod(postfix));
             }
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing6");
             
-            if (Config.GetValue<bool>("faction_related_configurations_enabled"))
+            if (Config.GetValueAsBool("faction_related_configurations_enabled"))
             {
                 var original = typeof(TIFactionState).GetMethod("GetMissionControlContributionFromHabs");
                 var postfix = typeof(MissionControlContributionFromHabs_Patch).GetMethod("GetMissionControlContributionFromHabs_Postfix");
@@ -76,10 +82,10 @@ namespace TI_General_Adjustments_Alterations
                 var original2 = typeof(TIHabModuleTemplate).GetMethod("MonthlyResourceIncome");
                 var prefix2 = typeof(MissionControlContributionFromHabs_Patch).GetMethod("MonthlyResourceIncome_Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
-                
             }
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing7");
 
-            if (Config.GetValue<bool>("agent_follow_up_success_failure_modifiers_enabled"))
+            if (Config.GetValueAsBool("agent_follow_up_success_failure_modifiers_enabled"))
             {
                 TIMissionResolutionPatch.setConfigVariables();
                 var original2 = typeof(TIMissionResolution_Contested).GetMethod("GetAllModifiers");
@@ -91,8 +97,9 @@ namespace TI_General_Adjustments_Alterations
                 var postfix6 = typeof(TIMissionStatePatch).GetMethod("ResolveMission_Postfix");
                 harmony.Patch(original6, null, new HarmonyMethod(postfix6));
             }
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing8");
 
-            if (Config.GetValue<bool>("mission_related_slider_additions_enabled"))
+            if (Config.GetValueAsBool("mission_related_slider_additions_enabled"))
             {
                 var original = typeof(AssignCouncilorToMission).GetMethod("Execute");
                 var postfix = typeof(AssignCouncilorToMission_Patch).GetMethod("Execute_MissionSliderAdjustments_PostFix");
@@ -102,6 +109,21 @@ namespace TI_General_Adjustments_Alterations
                 var postfix2 = typeof(GetPossibleMissionList_Patch).GetMethod("GetPossibleMissionList_MissionSliderAdjustments_Postfix");
                 harmony.Patch(original2, null, new HarmonyMethod(postfix2));
             }
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing9");
+
+            if (Config.GetValueAsBool("agent_attributes_alterations_enabled"))
+            {
+                TICouncilorState_RandomizeStats_Patch.setConfigVariables();
+                var original = typeof(TICouncilorState).GetMethod("RandomizeStats");
+                var prefix = typeof(TICouncilorState_RandomizeStats_Patch).GetMethod("Prefix");
+                harmony.Patch(original, new HarmonyMethod(prefix));
+
+                TICouncilorState_HireRecruitCost_Patch.setConfigVariables();
+                var original2 = typeof(TICouncilorState).GetMethod("HireRecruitCost");
+                var prefix2 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("Prefix");
+                harmony.Patch(original2, new HarmonyMethod(prefix2));
+            }
+            Console.WriteLine("TI_General_Adjustments_Alterations: testing10");
             return true;
         }
 

@@ -69,6 +69,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TICouncilorState_HireRecruitCost_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TICouncilorState_RandomizeStats_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TIFactionState_GenerateRecruitableCouncilors_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\factionstate\MissionControlContributionFromHabs_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\LoadGameOrStartGame_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\AssignCouncilorToMissionExecute_Patch.cs" />
@@ -86,7 +89,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="adjustments_alterations\harmonypatches\councilorstate" />
     <Folder Include="adjustments_alterations\methodreplacements" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

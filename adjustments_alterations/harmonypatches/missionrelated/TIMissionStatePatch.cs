@@ -5,13 +5,13 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.mission
 {
     public class TIMissionStatePatch
     {
-        public static short agent_follow_up_failures_decrease_chances_of_success_max_count = 0;
-        public static short agent_follow_up_successes_decrease_chances_of_success_max_count = 0;
+        public static int agent_follow_up_failures_decrease_chances_of_success_max_count = 0;
+        public static int agent_follow_up_successes_decrease_chances_of_success_max_count = 0;
         
         public static void setConfigVariables()
         {
-            agent_follow_up_failures_decrease_chances_of_success_max_count = Config.GetValueAsShort("agent_follow_up_failures_decrease_chances_of_success_max_count");
-            agent_follow_up_successes_decrease_chances_of_success_max_count = Config.GetValueAsShort("agent_follow_up_successes_decrease_chances_of_success_max_count");
+            agent_follow_up_failures_decrease_chances_of_success_max_count = Config.GetValueAsInt("agent_follow_up_failures_decrease_chances_of_success_max_count");
+            agent_follow_up_successes_decrease_chances_of_success_max_count = Config.GetValueAsInt("agent_follow_up_successes_decrease_chances_of_success_max_count");
         }
 
         public static void ResolveMission_Postfix(MissionResult __result)

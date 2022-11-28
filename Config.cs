@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using HarmonyLib;
 using Newtonsoft.Json;
-using Poly2Tri;
-using UnityModManagerNet;
 
 namespace TI_General_Adjustments_Alterations
 {
@@ -42,64 +41,64 @@ namespace TI_General_Adjustments_Alterations
             // mission related slider additions
             _configValues.Add("mission_related_slider_additions_enabled", true);
             _configValues.Add("mission_related_slider_operations_boost_modifier", 0.33f);
+            
+            // agent traits&stats enhancers and max random adjustments
+            _configValues.Add("agent_attributes_alterations_enabled", true);
+            _configValues.Add("agent_attributes_all_range_recruit_pool_modifier", 3.00f);
+            _configValues.Add("agent_attributes_investigation_range_recruit_pool_modifier", 1.50f);
+            _configValues.Add("agent_attributes_cost_factor_multiplier", 2.00f);
 
             // DEFAULT MODIFICATIONS END
 
             _configValues.Add("extended_installation_completed", false);
 
-            // load JSON configurations
-            using (StreamReader r = new StreamReader(currentAssemblyFullPathDirectory+"\\TI_General_Adjustments_Alterations_Config.txt")) {
-                string json = r.ReadToEnd();
-                var jsonConfigValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                if (jsonConfigValues == null)
-                {
-                    throw new Exception("TI_General_Adjustments_Alterations.json must be set in mod folder");
-                }
-                AddJsonDataToConfigurationsList(jsonConfigValues);
+            // load configurations
+            Dictionary<string,string> configFileData = File.ReadAllLines(currentAssemblyFullPathDirectory+"\\TI_General_Adjustments_Alterations_Config.txt")
+                .Select(x => x.Split('='))
+                .ToDictionary(x => x[0], x => x[1]);
+            
+            if (configFileData == null)
+            {
+                throw new Exception("TI_General_Adjustments_Alterations.txt must be set in mod folder");
             }
+            AddDataToConfigurationsList(configFileData);
 
             if (File.Exists(currentAssemblyFullPathDirectory + "\\Extended_Install_Configurations.txt"))
             {
                 using (StreamReader r = new StreamReader(currentAssemblyFullPathDirectory + "\\Extended_Install_Configurations.txt"))
                 {
                     string json = r.ReadToEnd();
-                    var jsonConfigValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    var jsonConfigValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
                     if (jsonConfigValues != null)
                     {
-                        AddJsonDataToConfigurationsList(jsonConfigValues);
+                        AddDataToConfigurationsList(jsonConfigValues);
                     }
                 }
             }
         }
 
-        private static void AddJsonDataToConfigurationsList(Dictionary<String, object> jsonData)
+        private static void AddDataToConfigurationsList(Dictionary<String, string> configFileData)
         {
-            foreach (KeyValuePair<string, object> entry in jsonData)
+            foreach (KeyValuePair<string, string> entry in configFileData)
             {
-                Console.WriteLine("set json configuration param: key - " + entry.Key + " value " + entry.Value + " valuetype " + entry.Value.GetType());
-                short newShortVal;
+                Console.WriteLine("set configuration param: key - " + entry.Key + " value " + entry.Value + " valuetype " + entry.Value.GetType());
                 int newIntVal;
                 float newFloatVal;
-                DateTime newDateVal;
-                if (DateTime.TryParse(entry.Value.ToString(), out newDateVal))
+                Boolean newBoolVal;
+                if (int.TryParse(entry.Value, out newIntVal) && !entry.Value.Contains("."))
                 {
-                    Console.WriteLine("json configuration param added as DateTime");
-                    _configValues[entry.Key] = newDateVal;
-                }
-                else if (short.TryParse(entry.Value.ToString(), out newShortVal) && !entry.Value.ToString().Contains("."))
-                {
-                    Console.WriteLine("json configuration param added as short");
-                    _configValues[entry.Key] = newShortVal;
-                }
-                else if (Int32.TryParse(entry.Value.ToString(), out newIntVal) && !entry.Value.ToString().Contains("."))
-                {
-                    Console.WriteLine("json configuration param added as int");
+                    Console.WriteLine("configuration param added as int");
                     _configValues[entry.Key] = newIntVal;
-                } 
-                else if (float.TryParse(entry.Value.ToString(), out newFloatVal))
+                }
+                else if (float.TryParse(entry.Value,NumberStyles.Float, CultureInfo.InvariantCulture, out newFloatVal))
                 {
-                    Console.WriteLine("json configuration param added as float");
+                    Console.WriteLine("configuration param added as float");
                     _configValues[entry.Key] = newFloatVal;
+                }
+                if (Boolean.TryParse(entry.Value, out newBoolVal))
+                {
+                    Console.WriteLine("configuration param added as boolean");
+                    _configValues[entry.Key] = newBoolVal;
                 }
                 else
                 {
@@ -113,24 +112,34 @@ namespace TI_General_Adjustments_Alterations
             return _configValues;
         }
 
-        public static T GetValue<T>(String jsonConfigKeyName)
-        {
-            return (T) getConfigValues().GetValueSafe(jsonConfigKeyName);
-        }
-        
         public static float GetValueAsFloat(String jsonConfigKeyName)
         {
-            return float.Parse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString());
+            float result;
+            if (!float.TryParse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+            {
+                throw new InvalidCastException("could not cast value to float");
+            }
+            return result;
         }
 
-        public static short GetValueAsShort(String jsonConfigKeyName)
+        public static int GetValueAsInt(String jsonConfigKeyName)
         {
-            return short.Parse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString());
+            return Int32.Parse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString());
+        }
+        
+        public static bool GetValueAsBool(String jsonConfigKeyName)
+        {
+            return Boolean.Parse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString());
         }
 
         public static bool IsDebugModeActive()
         {
             return (bool)getConfigValues().GetValueSafe("enable_debug_mode");
+        }
+        
+        public static bool isKeySet(string key)
+        {
+            return getConfigValues().ContainsKey(key);
         }
         
     }
