@@ -22,7 +22,9 @@ namespace TI_General_Adjustments_Alterations
             // nuclear barrage related configurations
             _configValues.Add("nuclear_barrage_related_configurations_enabled", true); // 15-30% increase
             _configValues.Add("nuclear_GDP_damage_to_target_nation_factor", 1.15f); // 15-30% increase
-            _configValues.Add("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor", 0.85f); // 8-20% decrease
+            _configValues.Add("nuclear_population_damage_to_target_nation_factor", 1.15f); // 15-30% increase
+            _configValues.Add("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor", 0.55f); // 8-20% decrease
+            _configValues.Add("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor_2", 0.75f);
 
             // nation related configurations
             _configValues.Add("nation_related_configurations_enabled", false);

@@ -13,34 +13,37 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 	        if (strength > 0f)
 			{
 				__instance.nation.ChangeAnnualSpaceFundingValue(-1f * (__instance.NationalGDPProportion() * __instance.nation.spaceFunding_year * strength * (nuclear ? 0.5f : 0.1f)));
-				double num;
-				float num2;
+				double gdpChangeToTargetNation;
+				float populationChangeToTargetNation;
 				if (nuclear)
 				{
-					num = -Config.GetValueAsFloat("nuclear_GDP_damage_to_target_nation_factor") * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.7 : 0.20000000298023224);
-					num += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, (float)num);
-					num2 = -1f * __instance.populationInMillions * strength * ((Config.GetValueAsFloat("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor") + UnityEngine.Random.Range(0f, 0.5f)) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.25f : 0.025f));
-					num2 += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, num2);
+					gdpChangeToTargetNation = -Config.GetValueAsFloat("nuclear_GDP_damage_to_target_nation_factor") * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.7 : 0.20000000298023224);
+					gdpChangeToTargetNation += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, (float)gdpChangeToTargetNation);
+					
+					populationChangeToTargetNation = -Config.GetValueAsFloat("nuclear_population_damage_to_target_nation_factor") * __instance.populationInMillions * strength * (UnityEngine.Random.Range(0f, 0.5f) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.25f : 0.025f));
+					populationChangeToTargetNation += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, populationChangeToTargetNation);
 				}
 				else
 				{
-					num = -1.0 * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * 0.10000000149011612;
-					num2 = -1f * __instance.populationInMillions * strength * ((0.75f + UnityEngine.Random.Range(0f, 0.5f)) * 0.001f);
+					gdpChangeToTargetNation = -1.0 * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * 0.10000000149011612;
+					populationChangeToTargetNation = -1f * __instance.populationInMillions * strength * ((0.75f + UnityEngine.Random.Range(0f, 0.5f)) * 0.001f);
 				}
-				__instance.nation.ModifyGDP(num);
-				__instance.ChangePopulation_Millions(num2);
+				__instance.nation.ModifyGDP(gdpChangeToTargetNation);
+				__instance.ChangePopulation_Millions(populationChangeToTargetNation);
+				float otherNationGdpDamageToApply = 0.00f;
 				if (strength >= 0.9f)
 				{
 					if (applyingCouncilState != null)
 					{
-						applyingCouncilState.CommitAtrocity(Mathf.Clamp((int)num2, 1, 10));
+						applyingCouncilState.CommitAtrocity(Mathf.Clamp((int)populationChangeToTargetNation, 1, 10));
 					}
 					if (nuclear && __instance.populationInMillions >= 1f)
 					{
-						float num3 = (applyingNation != __instance.nation) ? 0.005f : 0.001f;
+						otherNationGdpDamageToApply = (applyingNation != __instance.nation) ? 0.005f : 0.001f;
+						otherNationGdpDamageToApply = -Config.GetValueAsFloat("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor") * (otherNationGdpDamageToApply + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f);
 						foreach (TINationState tinationState in GameStateManager.AllExtantHumanNations())
 						{
-							tinationState.GDPPctChange(-0.75f * (num3 + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f));
+							tinationState.GDPPctChange(otherNationGdpDamageToApply);
 						}
 					}
 					if (__instance.coreEconomicRegion && applyingNation != __instance.nation)
@@ -52,7 +55,7 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 						});
 						foreach (TINationState tinationState2 in GameStateManager.AllExtantHumanNations())
 						{
-							tinationState2.GDPPctChange(-1f * (0.025f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f));
+							tinationState2.GDPPctChange(-Config.GetValueAsFloat("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor_2") * (0.025f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f));
 						}
 					}
 					if (__instance.resourceRegion && applyingNation != __instance.nation)
@@ -64,7 +67,7 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 						});
 						foreach (TINationState tinationState3 in GameStateManager.AllExtantHumanNations())
 						{
-							tinationState3.GDPPctChange(-1f * (0.015f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f));
+							tinationState3.GDPPctChange(-Config.GetValueAsFloat("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor_2") * (0.015f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f));
 						}
 					}
 					foreach (object obj in Enum.GetValues(typeof(PriorityType)))
