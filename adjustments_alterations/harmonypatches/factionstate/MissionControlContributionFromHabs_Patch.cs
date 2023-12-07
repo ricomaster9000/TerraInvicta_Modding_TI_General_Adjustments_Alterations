@@ -10,7 +10,7 @@ namespace TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatc
             __result *= (int)Math.Round(Config.GetValueAsFloat("faction_hab_mission_point_generation_multiplier"));
         }
 
-        public static bool MonthlyResourceIncome_Prefix(FactionResource resource, TIHabState hab, TIFactionState faction, TIHabModuleTemplate __instance, ref float __result)
+        public static bool MonthlyResourceIncome_Prefix(FactionResource resource, TIGameState location, TIFactionState faction, TIHabModuleTemplate __instance, ref float __result)
         {
             if (resource == FactionResource.MissionControl)
             {

@@ -37,7 +37,7 @@
       <HintPath>import\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\Terra Invicta\TerraInvicta_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>import\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>import\Newtonsoft.Json.dll</HintPath>
@@ -47,13 +47,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>..\..\Steam\steamapps\common\Terra Invicta\TerraInvicta_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>import\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>import\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>..\..\Steam\steamapps\common\Terra Invicta\TerraInvicta_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>import\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>import\UnityEngine.CoreModule.dll</HintPath>
@@ -62,7 +62,7 @@
       <HintPath>import\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>..\..\Steam\steamapps\common\Terra Invicta\TerraInvicta_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>import\UnityEngine.UIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityModManager">
       <HintPath>import\UnityModManager.dll</HintPath>
@@ -72,6 +72,7 @@
     <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TICouncilorState_HireRecruitCost_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TICouncilorState_RandomizeStats_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TIFactionState_GenerateRecruitableCouncilors_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\factionperiodicupdate\OnAnnualUpdatePatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\factionstate\MissionControlContributionFromHabs_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\LoadGameOrStartGame_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\AssignCouncilorToMissionExecute_Patch.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\GetPossibleMissionList_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\StartMissionPhase_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\nationstate\TINationStateHelper.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\resourcecost\ResourceCostCanAffordPatch.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\TIMissionResolutionPatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\TIMissionStatePatch.cs" />

@@ -110,6 +110,18 @@ namespace TI_General_Adjustments_Alterations
                 var prefix2 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
             }
+            
+            /*if (Config.GetValueAsBool("debt_feature"))
+            {
+                var original = typeof(TIFactionState).GetMethod("GetMissionControlContributionFromHabs");
+                var postfix = typeof(MissionControlContributionFromHabs_Patch).GetMethod("GetMissionControlContributionFromHabs_Postfix");
+                harmony.Patch(original, null, new HarmonyMethod(postfix));
+
+                var original2 = typeof(TIHabModuleTemplate).GetMethod("MonthlyResourceIncome");
+                var prefix2 = typeof(MissionControlContributionFromHabs_Patch).GetMethod("MonthlyResourceIncome_Prefix");
+                harmony.Patch(original2, new HarmonyMethod(prefix2));
+            }*/
+            
             return true;
         }
 

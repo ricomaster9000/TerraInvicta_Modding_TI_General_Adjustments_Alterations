@@ -10,24 +10,17 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
     {
 	    public static bool Prefix(TIRegionState __instance, float strength, TIFactionState applyingCouncilState, TINationState applyingNation, bool includeArmies, bool includeCouncilors, bool forceAttackSpaceAssets, bool nuclear)
         {
-	        if (strength > 0f)
+	        if (strength > 0f && nuclear)
 			{
 				__instance.nation.ChangeAnnualSpaceFundingValue(-1f * (__instance.NationalGDPProportion() * __instance.nation.spaceFunding_year * strength * (nuclear ? 0.5f : 0.1f)));
 				double gdpChangeToTargetNation;
 				float populationChangeToTargetNation;
-				if (nuclear)
-				{
-					gdpChangeToTargetNation = -Config.GetValueAsFloat("nuclear_GDP_damage_to_target_nation_factor") * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.7 : 0.20000000298023224);
-					gdpChangeToTargetNation += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, (float)gdpChangeToTargetNation);
+				gdpChangeToTargetNation = -Config.GetValueAsFloat("nuclear_GDP_damage_to_target_nation_factor") * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.7 : 0.20000000298023224);
+				gdpChangeToTargetNation += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, (float)gdpChangeToTargetNation);
 					
-					populationChangeToTargetNation = -Config.GetValueAsFloat("nuclear_population_damage_to_target_nation_factor") * __instance.populationInMillions * strength * (UnityEngine.Random.Range(0f, 0.5f) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.25f : 0.025f));
-					populationChangeToTargetNation += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, populationChangeToTargetNation);
-				}
-				else
-				{
-					gdpChangeToTargetNation = -1.0 * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * 0.10000000149011612;
-					populationChangeToTargetNation = -1f * __instance.populationInMillions * strength * ((0.75f + UnityEngine.Random.Range(0f, 0.5f)) * 0.001f);
-				}
+				populationChangeToTargetNation = -Config.GetValueAsFloat("nuclear_population_damage_to_target_nation_factor") * __instance.populationInMillions * strength * (UnityEngine.Random.Range(0f, 0.5f) * (applyingNation == null || applyingNation.enemies.Contains(__instance.nation) ? 0.25f : 0.025f));
+				populationChangeToTargetNation += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, populationChangeToTargetNation);
+				
 				__instance.nation.ModifyGDP(gdpChangeToTargetNation);
 				__instance.ChangePopulation_Millions(populationChangeToTargetNation);
 				float otherNationGdpDamageToApply = 0.00f;
@@ -37,7 +30,7 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 					{
 						applyingCouncilState.CommitAtrocity(Mathf.Clamp((int)populationChangeToTargetNation, 1, 10));
 					}
-					if (nuclear && __instance.populationInMillions >= 1f)
+					if (__instance.populationInMillions >= 1f)
 					{
 						otherNationGdpDamageToApply = (applyingNation != __instance.nation) ? 0.005f : 0.001f;
 						otherNationGdpDamageToApply = -Config.GetValueAsFloat("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor") * (otherNationGdpDamageToApply + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f);
@@ -75,13 +68,13 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 						PriorityType priorityType = (PriorityType)obj;
 						if (priorityType != PriorityType.Unity && priorityType != PriorityType.Spoils)
 						{
-							__instance.nation.ModifyAccumulatedInvestment(priorityType, strength, true);
+							__instance.nation.ModifyAccumulatedInvestment(priorityType, strength, true, false);
 						}
 					}
 				}
 				if (UnityEngine.Random.value < strength)
 				{
-					__instance.nation.ModifyAccumulatedInvestment(__instance.nation.GetRandomPriorityToDamage(), __instance.colonyRegion ? (strength * 0.5f) : strength, true);
+					__instance.nation.ModifyAccumulatedInvestment(__instance.nation.GetRandomPriorityToDamage(), __instance.colonyRegion ? (strength * 0.5f) : strength, true, true);
 				}
 				if (strength >= 0.75f && applyingNation != __instance.nation)
 				{
@@ -135,11 +128,11 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 								num4 -= num5 / 100f;
 							}
 							num4 += TIEffectsState.SumEffectsModifiers(Context.ArmyNuclearHardening, list[i].faction, num4);
-							list[i].TakeDamage(num4, applyingCouncilState);
+							list[i].TakeDamage(num4, applyingCouncilState, applyingNation);
 						}
 						else
 						{
-							list[i].TakeDamage(strength, applyingCouncilState);
+							list[i].TakeDamage(strength, applyingCouncilState, applyingNation);
 						}
 					}
 					if (nuclear)
@@ -147,7 +140,7 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 						TIArmyState[] array = __instance.armies.Except(list).ToArray<TIArmyState>();
 						for (int j = array.Length - 1; j >= 0; j--)
 						{
-							array[j].TakeDamage(strength / (48f + UnityEngine.Random.Range(0f, 4f)), applyingCouncilState);
+							array[j].TakeDamage(strength / (48f + UnityEngine.Random.Range(0f, 4f)), applyingCouncilState, applyingNation);
 						}
 					}
 				}
@@ -158,7 +151,7 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 						if (ticouncilorState.traits.None((TITraitTemplate x) => x.specialTraitRule == SpecialTraitRule.Survivor) && UnityEngine.Random.Range(0f, 2f) < strength)
 						{
 							TINotificationQueueState.LogCouncilorKilledInAttack(ticouncilorState, ticouncilorState.location);
-							ticouncilorState.KillCouncilor();
+							ticouncilorState.KillCouncilor(true,applyingCouncilState);
 						}
 					}
 				}
@@ -166,10 +159,6 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 				{
 					__instance.xenoforming.SetXenoformingLevel(0f);
 					TIGlobalValuesState.GlobalValues.TriggerNuclearDetonationEffect(true, applyingNation, __instance, __instance.nation);
-				}
-				else if (applyingCouncilState == null || (!applyingCouncilState.IsAlienFaction && !applyingCouncilState.IsAlienProxy))
-				{
-					__instance.xenoforming.ChangeXenoformingLevel(-(__instance.xenoforming.xenoformingLevel * strength), true);
 				}
 				GameControl.eventManager.TriggerEvent(new RegionDamaged(__instance), null, new object[]
 				{
@@ -179,9 +168,12 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.regions
 				{
 					__instance
 				});
+				return false;
 			}
-
-			return false;
+	        else
+	        {
+		        return true;
+	        }
         }
 	    
 	    public static void Postfix()
