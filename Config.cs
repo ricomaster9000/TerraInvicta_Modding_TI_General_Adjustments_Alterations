@@ -49,6 +49,9 @@ namespace TI_General_Adjustments_Alterations
             _configValues.Add("agent_attributes_all_range_recruit_pool_modifier", 3.00f);
             _configValues.Add("agent_attributes_investigation_range_recruit_pool_modifier", 1.50f);
             _configValues.Add("agent_attributes_cost_factor_multiplier", 2.00f);
+            
+            // resource depletion
+            _configValues.Add("resource_depletion_enabled", true);
 
             // DEFAULT MODIFICATIONS END
 

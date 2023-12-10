@@ -18,4 +18,5 @@ agent_attributes_investigation_range_recruit_pool_modifier=1.5
 agent_attributes_loyalty_range_recruit_pool_modifier=0.5
 agent_attributes_apparentloyalty_range_recruit_pool_modifier=0.5
 agent_attributes_cost_factor_multiplier=2.0
+resource_depletion_enabled=true
 enable_debug_mode=false

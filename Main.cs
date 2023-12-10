@@ -11,6 +11,7 @@ using TI_General_Adjustments_Alterations.adjustment_alterations.core.regionstate
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.councilorstate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.factionstate;
+using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.habsitestate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.missionrelated;
 using UnityEngine;
 using UnityModManagerNet;
@@ -121,6 +122,17 @@ namespace TI_General_Adjustments_Alterations
                 var prefix2 = typeof(MissionControlContributionFromHabs_Patch).GetMethod("MonthlyResourceIncome_Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
             }*/
+            
+            if (Config.GetValueAsBool("resource_depletion_enabled"))
+            {
+                var original = typeof(TIHabSiteState).GetMethod("RandomizeSiteMiningData");
+                var postfix = typeof(TIHabSiteStateRandomizeSiteMiningDataPatch).GetMethod("RandomizeSiteMiningData_Postfix");
+                harmony.Patch(original, null, new HarmonyMethod(postfix));
+
+                var original2 = typeof(TIFactionState).GetMethod("AddToCurrentResource");
+                var postfix2 = typeof(AddToCurrentResource_Patch).GetMethod("AddToCurrentResourcePostfix");
+                harmony.Patch(original2, null,new HarmonyMethod(postfix2));
+            }
             
             return true;
         }

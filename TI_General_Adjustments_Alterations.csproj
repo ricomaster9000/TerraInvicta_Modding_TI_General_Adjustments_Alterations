@@ -73,7 +73,9 @@
     <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TICouncilorState_RandomizeStats_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\councilorstate\TIFactionState_GenerateRecruitableCouncilors_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\factionperiodicupdate\OnAnnualUpdatePatch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\factionstate\AddToCurrentResource_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\factionstate\MissionControlContributionFromHabs_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\habsitestate\TIHabSiteStateRandomizeSiteMiningDataPatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\LoadGameOrStartGame_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\AssignCouncilorToMissionExecute_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\DefenseMissionCostModifier.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\StartMissionPhase_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\nationstate\TINationStateHelper.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\resourcecost\ResourceCostCanAffordPatch.cs" />
+    <Compile Include="adjustments_alterations\notifications\HabSiteResourcesDepleted.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\TIMissionResolutionPatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\TIMissionStatePatch.cs" />

@@ -2,7 +2,7 @@
 <WorkshopItemInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <PublishedFileId>2878051407</PublishedFileId>
   <Name>TI General Adjustments and Alterations</Name>
-  <Description>A "balancing" mod that helps scratch that itch when things start to feel "unfair" or unbalanced, will include a few minor features eventually. very compatible, configurable, Save game compatible</Description>
+  <Description>A "balancing" mod that includes minor features&changes, notable -> resource depletion, mission-success-decrease-stack-up, boost-sliders-added-to-additional-missions, randomized-recruitable-councilors, nuclear-damage-modifiers</Description>
   <IconFileName>TI General Adjustments and Alterations.png</IconFileName>
   <Tags />
 </WorkshopItemInfo>
