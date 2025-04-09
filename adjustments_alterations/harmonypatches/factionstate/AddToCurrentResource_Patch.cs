@@ -17,7 +17,7 @@ public class AddToCurrentResource_Patch
         {
             if (hab.HasMine)
             {
-                String resourceTotalKey = hab.habSite.parentBody.displayName + hab.habSite.detailDisplayName + resourceType;
+                String resourceTotalKey = hab.habSite.parentBody.displayName + hab.habSite.displayName + resourceType;
                 if (TIHabSiteStateRandomizeSiteMiningDataPatch.HabSiteToTotalResources.ContainsKey(resourceTotalKey))
                 {
                     ResourceSiteTotalInfo resourceSiteInfo = TIHabSiteStateRandomizeSiteMiningDataPatch.HabSiteToTotalResources[resourceTotalKey];

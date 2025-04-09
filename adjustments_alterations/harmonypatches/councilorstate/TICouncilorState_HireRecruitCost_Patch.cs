@@ -22,7 +22,7 @@ public class TICouncilorState_HireRecruitCost_Patch
 		float resourceAmount = 0f;
 		if (!faction.ideology.alien && !__instance.template.alien)
 		{
-			if (Array.IndexOf<FactionIdeology>(__instance.typeTemplate.affinities, faction.ideology.ideology) != -1)
+			if (__instance.typeTemplate.affinities.IndexOf(faction.ideology.ideology) != -1)
 			{
 				resourceAmount = (float)TemplateManager.global.affinityCouncilorRecruitCost_influence;
 			}
@@ -32,6 +32,7 @@ public class TICouncilorState_HireRecruitCost_Patch
 			}
 		}
 		resourceAmount += getTotalAttributeValuesContributingToCost(__instance);
+		Main.logDebug("Agent Recruit Pool Hire Cost Adjuster -> Adjusted hire cost to " + resourceAmount + " for agent " + __instance.personalName);
 		tiresourcesCost.AddCost(FactionResource.Influence, resourceAmount);
 		__result = tiresourcesCost;
 		return false;

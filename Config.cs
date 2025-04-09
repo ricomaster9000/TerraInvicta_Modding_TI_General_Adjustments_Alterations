@@ -21,10 +21,10 @@ namespace TI_General_Adjustments_Alterations
 
             // nuclear barrage related configurations
             _configValues.Add("nuclear_barrage_related_configurations_enabled", true); // 15-30% increase
-            _configValues.Add("nuclear_GDP_damage_to_target_nation_factor", 1.15f); // 15-30% increase
-            _configValues.Add("nuclear_population_damage_to_target_nation_factor", 1.15f); // 15-30% increase
-            _configValues.Add("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor", 0.55f); // 8-20% decrease
-            _configValues.Add("nuclear_GDP_damage_to_all_nations_if_above_certain_million_deaths_factor_2", 0.75f);
+            _configValues.Add("nuclear_GDP_damage_to_target_nation_multiplier", 2.00f); // 15-30% increase
+            _configValues.Add("nuclear_population_damage_to_target_nation_multiplier", 2.00f); // 15-30% increase
+            _configValues.Add("nuclear_GDP_damage_global_multiplier", 1.50f); // 8-20% decrease
+            _configValues.Add("nuclear_GDP_damage_global_because_of_core_region_multiplier", 1.50f);
 
             // nation related configurations
             _configValues.Add("nation_related_configurations_enabled", false);
@@ -36,9 +36,9 @@ namespace TI_General_Adjustments_Alterations
             // agent related success&failure chance modifiers
             _configValues.Add("agent_follow_up_success_failure_modifiers_enabled", true);
             _configValues.Add("agent_follow_up_successes_decrease_chances_of_success_max_count", 3); // stop decreasing at 60% (BASE GAME does not support this feature yet, added by mod)
-            _configValues.Add("agent_follow_up_successes_decrease_chances_of_success_factor", 0.10f); // 20% increase (BASE GAME does not support this feature yet, added by mod)
+            _configValues.Add("agent_follow_up_successes_decrease_chances_of_success_factor", 0.05f); // 20% increase (BASE GAME does not support this feature yet, added by mod)
             _configValues.Add("agent_follow_up_failures_decrease_chances_of_success_max_count", 5); // stop decreasing at 100% (BASE GAME does not support this feature yet, added by mod)
-            _configValues.Add("agent_follow_up_failures_decrease_chances_of_success_factor", 0.15f); // 20% increase (BASE GAME does not support this feature yet, added by mod)
+            _configValues.Add("agent_follow_up_failures_decrease_chances_of_success_factor", 0.10f); // 20% increase (BASE GAME does not support this feature yet, added by mod)
 
             // mission related slider additions
             _configValues.Add("mission_related_slider_additions_enabled", true);

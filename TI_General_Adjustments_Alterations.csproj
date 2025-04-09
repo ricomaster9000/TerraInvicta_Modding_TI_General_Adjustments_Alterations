@@ -75,6 +75,7 @@
     <Compile Include="adjustments_alterations\harmonypatches\factionperiodicupdate\OnAnnualUpdatePatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\factionstate\AddToCurrentResource_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\factionstate\MissionControlContributionFromHabs_Patch.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\habitatsscreencontroller\ResourceDepletion_PreviewBasePatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\habsitestate\TIHabSiteStateRandomizeSiteMiningDataPatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\LoadGameOrStartGame_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\AssignCouncilorToMissionExecute_Patch.cs" />
