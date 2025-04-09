@@ -7,6 +7,7 @@ using PavonisInteractive.TerraInvicta;
 using PavonisInteractive.TerraInvicta.Actions;
 using TI_Balancer.adjustments_alterations.harmonypatches.missionrelated;
 using TI_General_Adjustments_Alterations.adjustment_alterations.core.missionrelated;
+using TI_General_Adjustments_Alterations.adjustment_alterations.core.nationstate;
 using TI_General_Adjustments_Alterations.adjustment_alterations.core.regionstate;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches;
 using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.councilorstate;
@@ -31,7 +32,7 @@ namespace TI_General_Adjustments_Alterations
             Config.LoadValues();
             if (Config.IsDebugModeActive())
             {
-                PrintOutAllGameAssemblyMethods();
+                //PrintOutAllGameAssemblyMethods();
             }
 
             bool gameHasBeenUpdatedRerunExtendedInstall = false;
@@ -134,6 +135,17 @@ namespace TI_General_Adjustments_Alterations
                 harmony.Patch(original2, null,new HarmonyMethod(postfix2));
             }
             
+            if (Config.GetValueAsBool("remove_control_point_permanently_on_abandon_nation"))
+            {
+                var original = typeof(TINationState).GetMethod("SelfDisableControlPoints");
+                var prefix = typeof(TINationStatePermanentlyRemoveControlPointPatch).GetMethod("SelfDisableControlPointsPrefix");
+                harmony.Patch(original, new HarmonyMethod(prefix), null);
+                
+                var startMissionPhaseOriginal = typeof(CouncilorMissionCanvasController).GetMethod("StartMissionPhase");
+                var startMissionPhasePostfix = typeof(StartMissionPhase_Patch).GetMethod("Postfix");
+                harmony.Patch(startMissionPhaseOriginal, null, new HarmonyMethod(startMissionPhasePostfix));
+            }
+
             return true;
         }
 

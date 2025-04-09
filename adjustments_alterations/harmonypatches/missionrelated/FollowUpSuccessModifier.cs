@@ -19,7 +19,7 @@ namespace TI_General_Adjustments_Alterations.adjustment_alterations.core.mission
         {
             get
             {
-                return "Follow-Up-Success-Modifier";
+                return Loc.T("UI.TI_General_Adjustments_Alterations.FollowUpSuccessModifier");
             }
         }
 

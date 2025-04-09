@@ -21,7 +21,7 @@ public class AddToCurrentResource_Patch
                 if (TIHabSiteStateRandomizeSiteMiningDataPatch.HabSiteToTotalResources.ContainsKey(resourceTotalKey))
                 {
                     ResourceSiteTotalInfo resourceSiteInfo = TIHabSiteStateRandomizeSiteMiningDataPatch.HabSiteToTotalResources[resourceTotalKey];
-                    Main.logDebug("ResourceDepletion -> Substracting resources of resourceType " + resourceType + " for site " +
+                    Main.logDebug("ResourceDepletion -> Subtracting resources of resourceType " + resourceType + " for site " +
                                   hab.habSite.displayName + ", total remaining = " + resourceSiteInfo.getTotalRemaining());
                     float substractAmount = 0.00f;
                     switch (resourceType)
@@ -43,7 +43,7 @@ public class AddToCurrentResource_Patch
                             break;
                     }
                     resourceSiteInfo.substractFromTotalRemaining(substractAmount);
-                    Main.logDebug("ResourceDepletion -> Substracted " + hab.habSite.fissiles_day + ", total remaining = " + resourceSiteInfo.getTotalRemaining());
+                    Main.logDebug("ResourceDepletion -> Subtracted " + hab.habSite.fissiles_day + ", total remaining = " + resourceSiteInfo.getTotalRemaining());
 
                     if (resourceSiteInfo.getTotalRemaining() <= 0)
                     {

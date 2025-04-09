@@ -52,6 +52,9 @@ namespace TI_General_Adjustments_Alterations
             
             // resource depletion
             _configValues.Add("resource_depletion_enabled", true);
+            
+            // Remove-Control-Points-On-Abandon-Nation
+            _configValues.Add("remove_control_point_permanently_on_abandon_nation", true);
 
             // DEFAULT MODIFICATIONS END
 

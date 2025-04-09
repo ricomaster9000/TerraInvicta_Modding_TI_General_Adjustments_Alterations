@@ -1,0 +1,3 @@
+UI.TI_General_Adjustments_Alterations.FollowUpSuccessModifier=Modificador de Sucesso de Acompanhamento
+UI.TI_General_Adjustments_Alterations.FollowUpFailureModifier=Modificador de Falha de Acompanhamento
+UI.TI_General_Adjustments_Alterations.EMPTY=VAZIO

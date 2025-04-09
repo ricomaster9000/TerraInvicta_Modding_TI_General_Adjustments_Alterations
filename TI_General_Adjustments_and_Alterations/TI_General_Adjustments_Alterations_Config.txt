@@ -19,4 +19,5 @@ agent_attributes_loyalty_range_recruit_pool_modifier=0.5
 agent_attributes_apparentloyalty_range_recruit_pool_modifier=0.5
 agent_attributes_cost_factor_multiplier=2.0
 resource_depletion_enabled=true
+remove_control_point_permanently_on_abandon_nation=true
 enable_debug_mode=false

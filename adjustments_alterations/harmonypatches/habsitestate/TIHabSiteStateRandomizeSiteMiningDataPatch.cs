@@ -53,7 +53,8 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
 {
 
     public static readonly IDictionary<String, ResourceSiteTotalInfo> HabSiteToTotalResources = new Dictionary<string, ResourceSiteTotalInfo>();
-
+    private static readonly Random random = new Random();
+    
     public static void RandomizeSiteMiningData_Postfix(ref TIHabSiteState __instance)
     {
         if (__instance.parentBody.template.habSites == null)
@@ -77,6 +78,7 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
                     HabSiteToTotalResources.Add(
                         resourceTotalKeyWater, 
                         new ResourceSiteTotalInfo(GenerateResourceTotal(
+                            __instance,
                             key,
                             __instance.parentBody.meanRadius_km,
                             __instance.water_day,
@@ -94,6 +96,7 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
                     HabSiteToTotalResources.Add(
                         resourceTotalKeyVolatiles, 
                         new ResourceSiteTotalInfo(GenerateResourceTotal(
+                            __instance,
                             key,
                             __instance.parentBody.meanRadius_km,
                             __instance.volatiles_day,
@@ -111,6 +114,7 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
                     HabSiteToTotalResources.Add(
                         resourceTotalKeyMetals, 
                         new ResourceSiteTotalInfo(GenerateResourceTotal(
+                            __instance,
                             key,
                             __instance.parentBody.meanRadius_km,
                             __instance.metals_day,
@@ -128,6 +132,7 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
                     HabSiteToTotalResources.Add(
                         resourceTotalKeyNobleMetals, 
                         new ResourceSiteTotalInfo(GenerateResourceTotal(
+                            __instance,
                             key,
                             __instance.parentBody.meanRadius_km,
                             __instance.nobles_day,
@@ -145,6 +150,7 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
                     HabSiteToTotalResources.Add(
                         resourceTotalKeyFissiles, 
                         new ResourceSiteTotalInfo(GenerateResourceTotal(
+                            __instance,
                             key,
                             __instance.parentBody.meanRadius_km,
                             __instance.fissiles_day,
@@ -157,101 +163,41 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
         }
     }
 
-    private static float GenerateResourceTotal(FactionResource resourceType, double parentBodyMeanRadiusInKm, float dailyGeneratedIncome, int totalHabSites, SpaceObjectType objectType)
+    private static float GenerateResourceTotal(TIHabSiteState habSite, FactionResource resourceType, double parentBodyMeanRadiusInKm, float dailyGeneratedIncome, int totalHabSites, SpaceObjectType objectType)
     {
         if (dailyGeneratedIncome <= 0.00f)
         {
             return 0;
         }
-        Main.logDebug("ResourceDepletion -> generating total resource for site, " +
+        Main.logDebug("ResourceDepletion -> generating total resource for site " + habSite.displayName + ", " +
                       "resourceType = " + resourceType + Environment.NewLine +
                       "parentBodyMeanRadiusInKm = " + parentBodyMeanRadiusInKm + Environment.NewLine +
                       "dailyGeneratedIncome = " + dailyGeneratedIncome + Environment.NewLine + 
                       "totalHabSites = " + totalHabSites + Environment.NewLine +
                       "objectType = " + objectType);
-        Random rnd = new Random();
-        float mineableRatio = 0f;
-        switch(objectType)
+        int minDaysToLast = objectType switch
         {
-            case SpaceObjectType.Planet:
-                mineableRatio = 0.075f;
-            break;
-            case SpaceObjectType.DwarfPlanet:
-                mineableRatio = 0.10f;
-            break;
-            case SpaceObjectType.Asteroid:
-            case SpaceObjectType.AsteroidalMoon:
-                mineableRatio = 0.30f;
-            break;
-            case SpaceObjectType.Comet:
-                mineableRatio = 0.35f;
-            break;
-            case SpaceObjectType.PlanetaryMoon:
-                mineableRatio = 0.090f;
-            break;
-        }
-
-        switch (objectType)
-        {
-            case SpaceObjectType.Planet:
-                mineableRatio += (resourceType == FactionResource.Water || resourceType == FactionResource.Volatiles) ? mineableRatio+0.05f : mineableRatio;
-                break;
-            case SpaceObjectType.DwarfPlanet:
-                mineableRatio += (resourceType == FactionResource.Metals) ? mineableRatio+0.075f : mineableRatio;
-                break;
-            case SpaceObjectType.Asteroid:
-                mineableRatio += (resourceType == FactionResource.NobleMetals) ? mineableRatio+0.20f : mineableRatio;
-                break;
-            case SpaceObjectType.Comet:
-                mineableRatio += (resourceType == FactionResource.Volatiles) ? mineableRatio+0.10f : mineableRatio;
-                break;
-            case SpaceObjectType.PlanetaryMoon:
-                mineableRatio += (resourceType == FactionResource.Fissiles) ? mineableRatio+0.03F : mineableRatio;
-                break;
-            case SpaceObjectType.AsteroidalMoon:
-                mineableRatio += (resourceType == FactionResource.Metals) ? mineableRatio+0.175f : mineableRatio;
-                break;
-        }
-        int monthsToLast = objectType switch
-        {
-            SpaceObjectType.Planet => 600,
-            SpaceObjectType.DwarfPlanet => 240,
-            SpaceObjectType.PlanetaryMoon => 240,
-            SpaceObjectType.AsteroidalMoon => 24,
-            SpaceObjectType.Asteroid => 24,
-            SpaceObjectType.Comet => 16,
-            _ => 24
+            SpaceObjectType.Planet => 365*50,
+            SpaceObjectType.DwarfPlanet => 365*20,
+            SpaceObjectType.PlanetaryMoon => 365*20,
+            SpaceObjectType.AsteroidalMoon => 365*2,
+            SpaceObjectType.Asteroid => 365*2,
+            SpaceObjectType.Comet => (int)(365*1.33333),
+            _ => 365*2
         };
-        
+        int maxDaysToLast = minDaysToLast * 3;
 
-        // Adjust ranges based on resource type and ensure it lasts for at least 3 years
-        float totalResourceAmount = 0.00f;
-        int minTotalResourceAmount = (int)((parentBodyMeanRadiusInKm*2)*mineableRatio*((parentBodyMeanRadiusInKm/1000)/totalHabSites));
+        double totalResourceAmount = dailyGeneratedIncome*random.Next(minDaysToLast,maxDaysToLast);
 
-        if (minTotalResourceAmount < dailyGeneratedIncome * monthsToLast)
+        if ((parentBodyMeanRadiusInKm / 250) > totalHabSites)
         {
-            Main.logDebug("ResourceDepletion -> min possible resources won't last " + monthsToLast + " months");
+            Main.logDebug("ResourceDepletion -> total hab sites is less than sensible for celestial body " + habSite.parentBody.displayName + " size, it should be more, applying bonus modifier");
+            totalResourceAmount *= 1+(1-(totalHabSites / (parentBodyMeanRadiusInKm / 250)));
         }
-        
-        int maxTotalResourceAmount = minTotalResourceAmount*2;
-        switch (resourceType) 
-        {
-            case FactionResource.Water:
-            case FactionResource.Volatiles:
-            case FactionResource.Metals:
-            case FactionResource.NobleMetals:
-            case FactionResource.Fissiles:
-                totalResourceAmount = rnd.Next(minTotalResourceAmount, maxTotalResourceAmount);
-                break;
-            default:
-                throw new Exception("ResourceTypeNotSupported");
-        }
+
+        Main.logDebug("ResourceDepletion -> hab site " + habSite.displayName + " for resource " + 
+                      resourceType + " will last " + (totalResourceAmount / dailyGeneratedIncome)/365 + " years");
         Main.logDebug("ResourceDepletion -> generated total resource amount of " + totalResourceAmount);
-        return totalResourceAmount;
-    }
-
-    private static int ReturnGreatest(int a, int b)
-    {
-        return a > b ? a : b;
+        return (float)totalResourceAmount;
     }
 }

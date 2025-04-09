@@ -85,6 +85,7 @@
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\GetPossibleMissionList_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\missionrelated\StartMissionPhase_Patch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\nationstate\TINationStateHelper.cs" />
+    <Compile Include="adjustments_alterations\harmonypatches\nationstate\TINationStatePermanentlyRemoveControlPointPatch.cs" />
     <Compile Include="adjustments_alterations\harmonypatches\resourcecost\ResourceCostCanAffordPatch.cs" />
     <Compile Include="adjustments_alterations\notifications\HabSiteResourcesDepleted.cs" />
     <Compile Include="Config.cs" />
