@@ -14,12 +14,14 @@ public class StartMissionPhase_Patch
     
     public static void Postfix(CouncilorMissionCanvasController __instance)
     {
-        Main.logDebug("Remove-Control-Points-On-Abandon-Nation -> removing control points from nation");
-        foreach (TIControlPoint controlPoint in TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove)
+        if (TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove.Count > 0)
         {
-            controlPoint.SetFaction(null, false);
+            Main.logDebug("Remove-Control-Points-On-Abandon-Nation -> removing control points from nation");
+            foreach (TIControlPoint controlPoint in TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove)
+            {
+                controlPoint.SetFaction(null, false);
+            }
+            TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove.Clear();
         }
-
-        TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove.Clear();
     }
 }

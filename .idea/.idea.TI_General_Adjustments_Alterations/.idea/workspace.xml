@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c677fcb9-f6cd-47dd-a82b-73a3e7c6e1df" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TI_Augmenter.zip" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/augmentations/harmonypatches/habitatsscreencontroller/ResourceDepletion_PreviewBasePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/habitatsscreencontroller/ResourceDepletion_PreviewBasePatch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/FollowUpFailureModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/FollowUpFailureModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/StartMissionPhase_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/StartMissionPhase_Patch.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +93,7 @@
       <workItem from="1702318482689" duration="3593000" />
       <workItem from="1704902043848" duration="9000" />
       <workItem from="1744130865389" duration="15183000" />
-      <workItem from="1744185845973" duration="26308000" />
+      <workItem from="1744185845973" duration="27195000" />
     </task>
     <servers />
   </component>
