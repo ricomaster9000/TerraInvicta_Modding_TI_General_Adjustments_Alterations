@@ -215,7 +215,7 @@ namespace TI_Augmenter
         {
             if (Config.IsDebugModeActive())
             {
-                Console.WriteLine("TI_General_Adjustments_Alterations: " + log);
+                Console.WriteLine("TI_Augmenter: " + log);
             }
         }
         

@@ -19,7 +19,7 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated
         {
             get
             {
-                return Loc.T("UI.TI_General_Adjustments_Alterations.FollowUpFailureModifier");
+                return Loc.T("UI.TI_Augmenter.FollowUpFailureModifier");
             }
         }
 

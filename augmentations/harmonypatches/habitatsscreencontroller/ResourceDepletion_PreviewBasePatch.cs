@@ -76,7 +76,7 @@ public class ResourceDepletion_DetailDisplayNamePatch
 
             if (__instance.habToDisplay.mine != null && __instance.habToDisplay.mine.active)
             {
-                string emptyText = "0 - " + Loc.T("UI.TI_General_Adjustments_Alterations.EMPTY");
+                string emptyText = "0 - " + Loc.T("UI.TI_Augmenter.EMPTY");
                 
                 __instance.siteWater.SetText(IsDepleted(FactionResource.Water) ? emptyText:
                     TIUtilities.FormatSmallNumber(__instance.habToDisplay.mine.moduleTemplate.GetMiningIncome_Month(__instance.activePlayer, __instance.habToDisplay.habSite, FactionResource.Water), 7, 0, true, false));
