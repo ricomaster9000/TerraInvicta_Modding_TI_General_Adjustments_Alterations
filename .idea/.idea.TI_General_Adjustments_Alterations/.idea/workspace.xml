@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c677fcb9-f6cd-47dd-a82b-73a3e7c6e1df" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_Augmenter/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_Augmenter/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_Augmenter/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_Augmenter/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_Augmenter/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_Augmenter/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TI_Augmenter.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/augmentations/harmonypatches/LoadGameOrStartGame_Patch.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/import/Unity.Entities.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/aws.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Config.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_Alterations.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_Alterations.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_Alterations.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations.zip" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/EXTENDED_INSTALL.bat" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/EXTENDED_INSTALL.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ExtendedInstaller/ExtendedInstaller.exe" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ExtendedInstaller/ExtendedInstaller.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ExtendedInstaller/Mono.Cecil.Mdb.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ExtendedInstaller/Mono.Cecil.Mdb.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ExtendedInstaller/Mono.Cecil.Pdb.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ExtendedInstaller/Mono.Cecil.Pdb.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ExtendedInstaller/Mono.Cecil.Rocks.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ExtendedInstaller/Mono.Cecil.Rocks.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ExtendedInstaller/Mono.Cecil.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ExtendedInstaller/Mono.Cecil.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ExtendedInstaller/Newtonsoft.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ExtendedInstaller/Newtonsoft.Json.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Extended_Install_Configurations.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Extended_Install_Configurations.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ItemData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ItemData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/chs/UI_Main.chs" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/chs/UI_Main.chs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/cht/UI_Main.cht" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/cht/UI_Main.cht" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/deu/UI_Main.deu" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/deu/UI_Main.deu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/en/UI_Main.en" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/en/UI_Main.en" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/esp/UI_Main.esp" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/esp/UI_Main.esp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/fr/UI_Main.fr" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/fr/UI_Main.fr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/jpn/UI_Main.jpn" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/jpn/UI_Main.jpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/pol/UI_Main.pol" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/pol/UI_Main.pol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/Localization/por/UI_Main.por" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/Localization/por/UI_Main.por" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/ModInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ModInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/TI General Adjustments and Alterations.png" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/TI_General_Adjustments_Alterations.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/TI_General_Adjustments_Alterations.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/TI_General_Adjustments_Alterations_Config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/TI_Augmenter_Config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_General_Adjustments_and_Alterations/WorkshopItemInfo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/WorkshopItemInfo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/LoadGameOrStartGame_Patch.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/councilorstate/TICouncilorState_HireRecruitCost_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TICouncilorState_HireRecruitCost_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/councilorstate/TICouncilorState_RandomizeStats_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TICouncilorState_RandomizeStats_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/councilorstate/TIFactionState_GenerateRecruitableCouncilors_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TIFactionState_GenerateRecruitableCouncilors_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/factionperiodicupdate/OnAnnualUpdatePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/factionperiodicupdate/OnAnnualUpdatePatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/factionstate/AddToCurrentResource_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/factionstate/AddToCurrentResource_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/factionstate/MissionControlContributionFromHabs_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/factionstate/MissionControlContributionFromHabs_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/habitatsscreencontroller/ResourceDepletion_PreviewBasePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/habitatsscreencontroller/ResourceDepletion_PreviewBasePatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/habsitestate/TIHabSiteStateRandomizeSiteMiningDataPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/habsitestate/TIHabSiteStateRandomizeSiteMiningDataPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/AssignCouncilorToMissionExecute_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/AssignCouncilorToMissionExecute_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/DefenseMissionCostModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/DefenseMissionCostModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/FollowUpFailureModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/FollowUpFailureModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/FollowUpSuccessModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/FollowUpSuccessModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/GetPossibleMissionList_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/GetPossibleMissionList_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/ModifiedProtectTIMissionTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/ModifiedProtectTIMissionTemplate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/StartMissionPhase_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/StartMissionPhase_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/TIMissionResolutionPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/TIMissionResolutionPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/missionrelated/TIMissionStatePatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/TIMissionStatePatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/nationstate/TINationStateHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/nationstate/TINationStateHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/nationstate/TINationStatePermanentlyRemoveControlPointPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/nationstate/TINationStatePermanentlyRemoveControlPointPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/regionstate/ApplyDamageToRegionPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/regionstate/ApplyDamageToRegionPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/harmonypatches/resourcecost/ResourceCostCanAffordPatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/resourcecost/ResourceCostCanAffordPatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adjustments_alterations/notifications/HabSiteResourcesDepleted.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/notifications/HabSiteResourcesDepleted.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/01/ceca314f/TIHabSiteState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/20/2c9f3794/FactionResource.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/25/70a39c5f/GameControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/49/9166284c/CouncilorMissionCanvasController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/6d/69e38953/HabitatsScreenController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/a6/a125ac36/SolarSystemBootstrap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/a7/96524245/ViewControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/ba/b36cba24/TISpaceBodyState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/be/8445632d/TIDataTemplate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/c4/7bb5f0bc/TINationState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/fe/97e8242a/TIFactionState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/30/8b90b5e5/TIHabSiteState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/4b/fdaf6ebf/SpaceObjectType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/62/47a4852a/Loc.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/72/d926f4a3/TIFactionState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/a2/e6fb8755/HabitatsScreenController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/c7/90ce9c97/FactionResource.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/77087e24875842fbbc75f24e6294e56352f400/cd/6c685ad0/TISpaceObjectState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e4c8adcbaeda47e585edad18a1f0ab7c29a00/69/4d4ec582/UnityModManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Config.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Main.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/LoadGameOrStartGame_Patch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/factionstate/AddToCurrentResource_Patch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/habitatsscreencontroller/ResourceDepletion_PreviewBasePatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/habsitestate/TIHabSiteStateRandomizeSiteMiningDataPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/ModifiedProtectTIMissionTemplate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/TIMissionResolutionPatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/TIMissionStatePatch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/nationstate/TINationStateHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/augmentations/harmonypatches/regionstate/ApplyDamageToRegionPatch.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2R6GrRpatzowEUXbFURrTbVA652" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ReSpellerSettingsId&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c677fcb9-f6cd-47dd-a82b-73a3e7c6e1df" name="Changes" comment="" />
+      <created>1686563329718</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686563329718</updated>
+      <workItem from="1686563333243" duration="2862000" />
+      <workItem from="1686583418700" duration="363000" />
+      <workItem from="1686764972335" duration="6098000" />
+      <workItem from="1688810980394" duration="2066000" />
+      <workItem from="1701976828588" duration="6709000" />
+      <workItem from="1702081685415" duration="4780000" />
+      <workItem from="1702191807806" duration="11591000" />
+      <workItem from="1702318482689" duration="3593000" />
+      <workItem from="1704902043848" duration="9000" />
+      <workItem from="1744130865389" duration="15183000" />
+      <workItem from="1744185845973" duration="24830000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

@@ -1,30 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using HarmonyLib;
+using Newtonsoft.Json;
 using PavonisInteractive.TerraInvicta;
 using PavonisInteractive.TerraInvicta.Actions;
-using TI_Balancer.adjustments_alterations.harmonypatches.missionrelated;
-using TI_General_Adjustments_Alterations.adjustment_alterations.core.missionrelated;
-using TI_General_Adjustments_Alterations.adjustment_alterations.core.nationstate;
-using TI_General_Adjustments_Alterations.adjustment_alterations.core.regionstate;
-using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches;
-using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.councilorstate;
-using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.factionstate;
-using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.habsitestate;
-using TI_General_Adjustments_Alterations.adjustments_alterations.harmonypatches.missionrelated;
+using PavonisInteractive.TerraInvicta.Systems.Bootstrap;
+using TI_Augmenter.augmentations.harmonypatches.missionrelated;
+using TI_Augmenter.augmentations.harmonypatches.nationstate;
+using TI_Augmenter.augmentations.harmonypatches.regionstate;
+using TI_Augmenter.augmentations.harmonypatches;
+using TI_Augmenter.augmentations.harmonypatches.councilorstate;
+using TI_Augmenter.augmentations.harmonypatches.factionstate;
+using TI_Augmenter.augmentations.harmonypatches.habsitestate;
 using UnityEngine;
 using UnityModManagerNet;
 // ReSharper disable All
 
-namespace TI_General_Adjustments_Alterations
+namespace TI_Augmenter
 {
     public class Main
     {
         public static bool enabled;
         public static UnityModManager.ModEntry mod;
         private static Harmony harmony = null;
+        public static bool MustInitializeResourcePoolData = false;
 
         public static bool Load(UnityModManager.ModEntry modEntry) {
             mod = modEntry;
@@ -46,17 +49,17 @@ namespace TI_General_Adjustments_Alterations
             {
                 var psi = new ProcessStartInfo();
                 psi.CreateNoWindow = true;
-                psi.FileName = Path.GetFullPath(modEntry.Path+"\\EXTENDED_INSTALL.bat");
+                psi.FileName = Path.GetFullPath( modEntry.Path+"\\EXTENDED_INSTALL.bat");
                 psi.UseShellExecute = false;
                 psi.WindowStyle = ProcessWindowStyle.Hidden;
-                psi.WorkingDirectory = modEntry.Path;
+                psi.WorkingDirectory =  modEntry.Path;
                 var process = new Process();
                 process.StartInfo = psi;
                 process.Start();
                 Application.Quit(0);
             }
             harmony = new Harmony(modEntry.Info.Id);
-            applyGameStateListenerPatches(harmony);
+            applyUniversalGameStateListenerPatches(harmony);
             if (Config.GetValueAsBool("nuclear_barrage_related_configurations_enabled"))
             {
                 var original = typeof(TIRegionState).GetMethod("ApplyDamageToRegion");
@@ -123,7 +126,7 @@ namespace TI_General_Adjustments_Alterations
                 var prefix2 = typeof(MissionControlContributionFromHabs_Patch).GetMethod("MonthlyResourceIncome_Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
             }*/
-            
+
             if (Config.GetValueAsBool("resource_depletion_enabled"))
             {
                 var original = typeof(TIHabSiteState).GetMethod("RandomizeSiteMiningData");
@@ -133,8 +136,12 @@ namespace TI_General_Adjustments_Alterations
                 var original2 = typeof(TIFactionState).GetMethod("AddToCurrentResource");
                 var postfix2 = typeof(AddToCurrentResource_Patch).GetMethod("AddToCurrentResourcePostfix");
                 harmony.Patch(original2, null,new HarmonyMethod(postfix2));
+                
+                var original3 = typeof(GameControl).GetMethod("Initialize");
+                var postfix3 = typeof(TIHabSiteStateRandomizeSiteMiningDataPatch).GetMethod("InitializeGamePostfix");
+                harmony.Patch(original3, null,new HarmonyMethod(postfix3));
             }
-            
+
             if (Config.GetValueAsBool("remove_control_point_permanently_on_abandon_nation"))
             {
                 var original = typeof(TINationState).GetMethod("SelfDisableControlPoints");
@@ -181,7 +188,7 @@ namespace TI_General_Adjustments_Alterations
             }
         }
 
-        private static void applyGameStateListenerPatches(Harmony harmony)
+        private static void applyUniversalGameStateListenerPatches(Harmony harmony)
         {
             var clearGameDataOriginal = typeof(ViewControl).GetMethod("ClearGameData");
             var clearGameDataPrefix = typeof(LoadGameOrStartGame_Patch).GetMethod("ClearGameData_Prefix");
@@ -194,6 +201,14 @@ namespace TI_General_Adjustments_Alterations
             var startMissionPhaseOriginal = typeof(CouncilorMissionCanvasController).GetMethod("StartMissionPhase");
             var startMissionPhasePrefix = typeof(StartMissionPhase_Patch).GetMethod("Prefix");
             harmony.Patch(startMissionPhaseOriginal, new HarmonyMethod(startMissionPhasePrefix));
+            
+            var saveAllGameStatesOriginal = typeof(GameStateManager).GetMethod("SaveAllGameStates");
+            var saveAllGameStatesPrefix = typeof(LoadGameOrStartGame_Patch).GetMethod("SaveAllGameStatesPrefix");
+            harmony.Patch(saveAllGameStatesOriginal, new HarmonyMethod(saveAllGameStatesPrefix));
+
+            var loadAllGameStatesOriginal = typeof(GameStateManager).GetMethod("LoadAllGameStates");
+            var loadAllGameStatesPrefix = typeof(LoadGameOrStartGame_Patch).GetMethod("LoadAllGameStatesPrefix");
+            harmony.Patch(loadAllGameStatesOriginal, new HarmonyMethod(loadAllGameStatesPrefix));
         }
 
         public static void logDebug(string log)
@@ -204,6 +219,53 @@ namespace TI_General_Adjustments_Alterations
             }
         }
         
+        private static float ValueAsFloat(String valueAsString)
+        {
+            float result;
+            if (!float.TryParse(valueAsString, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+            {
+                throw new InvalidCastException("could not cast value to float");
+            }
+            return result;
+        }
         
+        
+        public static IDictionary<String, ResourceSiteTotalInfo> LoadResourcePoolData(string safeFilePath) {
+            // DEFAULT MODIFICATIONS START
+            String currentAssemblyFullPathDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            // load configurations
+
+            if (!File.Exists(safeFilePath + "_resource_pool_data.txt"))
+            {
+                return null;
+            }
+            
+            Dictionary<string,ResourceSiteTotalInfo> resourcePoolInfo = File.ReadAllLines(safeFilePath+"_resource_pool_data.txt")
+                .Select(x => x.Split('='))
+                .ToDictionary(x => x[0], x =>
+                {
+                    ResourceSiteTotalInfo resourceSiteTotalInfo = new ResourceSiteTotalInfo(ValueAsFloat(x[1]));
+                    return resourceSiteTotalInfo;
+                });
+
+            return resourcePoolInfo;
+        }
+        
+        public static void SaveResourcePoolData(string safeFilePath, IDictionary<string, ResourceSiteTotalInfo> resourcePoolInfo)
+        {
+            if (resourcePoolInfo == null || resourcePoolInfo.Count == 0)
+                return;
+
+            string currentAssemblyFullPathDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            List<string> lines = new List<string>();
+            foreach (var kvp in resourcePoolInfo)
+            {
+                string line = $"{kvp.Key}={kvp.Value.getTotalRemaining().ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+                lines.Add(line);
+            }
+
+            File.WriteAllLines(safeFilePath + "_resource_pool_data.txt", lines);
+        }
     }
 }

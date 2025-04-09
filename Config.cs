@@ -6,7 +6,7 @@ using System.Linq;
 using HarmonyLib;
 using Newtonsoft.Json;
 
-namespace TI_General_Adjustments_Alterations
+namespace TI_Augmenter
 {
     public static class Config
     {
@@ -61,13 +61,13 @@ namespace TI_General_Adjustments_Alterations
             _configValues.Add("extended_installation_completed", false);
 
             // load configurations
-            Dictionary<string,string> configFileData = File.ReadAllLines(currentAssemblyFullPathDirectory+"\\TI_General_Adjustments_Alterations_Config.txt")
+            Dictionary<string,string> configFileData = File.ReadAllLines(currentAssemblyFullPathDirectory+"\\TI_Augmenter_Config.txt")
                 .Select(x => x.Split('='))
                 .ToDictionary(x => x[0], x => x[1]);
             
             if (configFileData == null)
             {
-                throw new Exception("TI_General_Adjustments_Alterations.txt must be set in mod folder");
+                throw new Exception("TI_Augmenter_Config.txt must be set in mod folder");
             }
             AddDataToConfigurationsList(configFileData);
 

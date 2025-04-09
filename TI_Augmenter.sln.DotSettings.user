@@ -1,0 +1,24 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CProgram_0020Files_0020_0028x86_0029_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CAssembly_002DCSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTerra_005FInvicta_005Fmodifications_005CExtended_005FInstaller_005Cimports_005CAssembly_002DCSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005C0Harmony_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005CAssembly_002DCSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005CUnityEngine_002ECoreModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005CUnityEngine_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005CUnityEngine_002EUI_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005CUnityModManager_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005Cprojects_005CTI_005FBalancer_005Cimport_005CNewtonsoft_002EJson_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CAssembly_002DCSharp_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CFMODUnityResonance_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CFMODUnity_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CUnityEngine_002EAnimationModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CUnityEngine_002EUIModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CSteam_005Csteamapps_005Ccommon_005CTerra_0020Invicta_005CTerraInvicta_005FData_005CManaged_005CUnity_002ETextMeshPro_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="F:\projects\TI_Balancer\import\0Harmony.dll" /&gt;&#xD;
+  &lt;Assembly Path="F:\projects\TI_Balancer\import\Newtonsoft.Json.dll" /&gt;&#xD;
+  &lt;Assembly Path="F:\projects\TI_Balancer\TI General Adjustments and Alterations\TI_General_Adjustments_Alterations.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\projects\TerraInvicta_Modding_TI_General_Adjustments_Alterations\import\Unity.Entities.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">C:\Program Files\JetBrains\JetBrains Rider 2022.2.3\tools\MSBuild\Current\Bin\MSBuild.exe</s:String>
+	<s:Int64 x:Key="/Default/Environment/Hierarchy/Build/BuildTool/MsbuildVersion/@EntryValue">1114112</s:Int64></wpf:ResourceDictionary>

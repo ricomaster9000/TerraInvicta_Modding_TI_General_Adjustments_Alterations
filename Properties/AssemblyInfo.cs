@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TI_General_Adjustments_Alterations")]
+[assembly: AssemblyTitle("TI_Augmenter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TI_General_Adjustments_Alterations")]
+[assembly: AssemblyProduct("TI_Augmenter")]
 [assembly: AssemblyCopyright("Copyright © ModMaster9000 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

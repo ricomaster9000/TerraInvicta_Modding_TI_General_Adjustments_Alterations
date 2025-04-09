@@ -1,3 +1,0 @@
-UI.TI_General_Adjustments_Alterations.FollowUpSuccessModifier=后续成功修正值
-UI.TI_General_Adjustments_Alterations.FollowUpFailureModifier=后续失败修正值
-UI.TI_General_Adjustments_Alterations.EMPTY=空
