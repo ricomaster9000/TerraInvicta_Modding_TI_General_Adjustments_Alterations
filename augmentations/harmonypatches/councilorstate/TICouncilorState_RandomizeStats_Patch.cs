@@ -8,6 +8,7 @@ public class TICouncilorState_RandomizeStats_Patch
 {
 	private static float agent_attributes_all_range_recruit_pool_modifier = 1.00f;
 	private static Dictionary<CouncilorAttribute,float> agent_attributes_range_recruit_pool_modifier_specific = new Dictionary<CouncilorAttribute, float>();
+	private static readonly Random Random = new Random();
 	
 	public static void setConfigVariables()
 	{
@@ -24,9 +25,13 @@ public class TICouncilorState_RandomizeStats_Patch
 			}
 		}
 	}
-	
-	public static bool Prefix(TICouncilorState __instance)
+
+	public static bool Prefix(TICouncilorState __instance, bool forceBestStats)
 	{
+		if (forceBestStats || Random.Next(1,2) == 2)
+		{
+			return true;
+		}
 		Main.logDebug("TICouncilorState_RandomizeStats_Patch - Prefix: modifying the maximum value attributes can be when recruiting agents");
 		__instance.attributes[CouncilorAttribute.Persuasion] = __instance.typeTemplate.basePersuasion +
 		                                                       UnityEngine.Random.Range(0, (__instance.typeTemplate.randPersuasion + 1)*getModifierForAttribute(CouncilorAttribute.Persuasion));

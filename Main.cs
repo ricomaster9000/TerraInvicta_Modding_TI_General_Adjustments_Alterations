@@ -110,10 +110,13 @@ namespace TI_Augmenter
                 var prefix = typeof(TICouncilorState_RandomizeStats_Patch).GetMethod("Prefix");
                 harmony.Patch(original, new HarmonyMethod(prefix));
 
-                TICouncilorState_HireRecruitCost_Patch.setConfigVariables();
                 var original2 = typeof(TICouncilorState).GetMethod("HireRecruitCost");
                 var prefix2 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
+                
+                var original3 = typeof(TIFactionState).GetMethod("get_maxRecruitableCandidates");
+                var prefix3 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("MaxRecruitableCandidatesPrefix");
+                harmony.Patch(original3, new HarmonyMethod(prefix3));
             }
             
             /*if (Config.GetValueAsBool("debt_feature"))

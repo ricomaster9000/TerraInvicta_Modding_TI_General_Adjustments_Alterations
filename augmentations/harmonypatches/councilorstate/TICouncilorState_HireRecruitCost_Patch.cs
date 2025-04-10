@@ -16,6 +16,12 @@ public class TICouncilorState_HireRecruitCost_Patch
 		}
 	}
 	
+	public static bool MaxRecruitableCandidatesPrefix(ref int __result)
+	{
+		__result = 12;
+		return false;
+	}
+	
 	public static bool Prefix(TICouncilorState __instance, TIFactionState faction, ref TIResourcesCost __result)
 	{
 		TIResourcesCost tiresourcesCost = new TIResourcesCost();

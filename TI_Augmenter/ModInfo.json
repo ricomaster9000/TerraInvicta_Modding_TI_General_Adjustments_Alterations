@@ -5,7 +5,7 @@
     "Author": "ModMaster9000",
     "ModURL": "https://steamcommunity.com/sharedfiles/filedetails/?id=2873851670",
     "Description": "General Adjustments&Alterations",
-    "Version": "0.3.0",
+    "Version": "0.3.1",
     "ManagerVersion": "0.32.2.0",
     "AssemblyName": "TI_Augmenter.dll",
     "EntryMethod": "TI_Augmenter.Main.Load"

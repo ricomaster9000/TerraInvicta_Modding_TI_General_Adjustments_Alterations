@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c677fcb9-f6cd-47dd-a82b-73a3e7c6e1df" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TI_General_Adjustments_Alterations/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/StartMissionPhase_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/missionrelated/StartMissionPhase_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TI_Augmenter/ModInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/TI_Augmenter/ModInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TICouncilorState_HireRecruitCost_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TICouncilorState_HireRecruitCost_Patch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TICouncilorState_RandomizeStats_Patch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/augmentations/harmonypatches/councilorstate/TICouncilorState_RandomizeStats_Patch.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +18,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/01/ceca314f/TIHabSiteState.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/20/2c9f3794/FactionResource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/25/70a39c5f/GameControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/36/dacc36a0/TICouncilorState.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/49/9166284c/CouncilorMissionCanvasController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/6d/69e38953/HabitatsScreenController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2eb19ed7253a4f29b21547c2d9076a5860da00/a6/a125ac36/SolarSystemBootstrap.cs" root0="SKIP_HIGHLIGHTING" />
@@ -93,7 +98,7 @@
       <workItem from="1702318482689" duration="3593000" />
       <workItem from="1704902043848" duration="9000" />
       <workItem from="1744130865389" duration="15183000" />
-      <workItem from="1744185845973" duration="27195000" />
+      <workItem from="1744185845973" duration="30133000" />
     </task>
     <servers />
   </component>
