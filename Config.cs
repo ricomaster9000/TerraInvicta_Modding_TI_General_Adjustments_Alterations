@@ -83,29 +83,30 @@ namespace TI_Augmenter
                     }
                 }
             }
+            Main.logDebug("Config Loaded");
         }
 
         private static void AddDataToConfigurationsList(Dictionary<String, string> configFileData)
         {
             foreach (KeyValuePair<string, string> entry in configFileData)
             {
-                Console.WriteLine("set configuration param: key - " + entry.Key + " value " + entry.Value + " valuetype " + entry.Value.GetType());
+                Main.logDebug("set configuration param: key - " + entry.Key + " value " + entry.Value + " valuetype " + entry.Value.GetType());
                 int newIntVal;
                 float newFloatVal;
                 Boolean newBoolVal;
                 if (int.TryParse(entry.Value, out newIntVal) && !entry.Value.Contains("."))
                 {
-                    Console.WriteLine("configuration param added as int");
+                    Main.logDebug("configuration param added as int");
                     _configValues[entry.Key] = newIntVal;
                 }
                 else if (float.TryParse(entry.Value,NumberStyles.Float, CultureInfo.InvariantCulture, out newFloatVal))
                 {
-                    Console.WriteLine("configuration param added as float");
+                    Main.logDebug("configuration param added as float");
                     _configValues[entry.Key] = newFloatVal;
                 }
                 if (Boolean.TryParse(entry.Value, out newBoolVal))
                 {
-                    Console.WriteLine("configuration param added as boolean");
+                    Main.logDebug("configuration param added as boolean");
                     _configValues[entry.Key] = newBoolVal;
                 }
                 else

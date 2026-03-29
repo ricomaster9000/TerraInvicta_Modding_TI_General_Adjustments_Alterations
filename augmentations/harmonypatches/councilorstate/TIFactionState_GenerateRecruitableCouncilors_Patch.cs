@@ -9,7 +9,7 @@ public class TIFactionState_GenerateRecruitableCouncilors_Patch
 {
 	public static void Postfix(TIFactionState __instance, bool campaignStart)
 		{
-			bool result = false;
+			/*bool result = false;
 			if (__instance.availableCouncilors.Count > 1 && !campaignStart && __instance.IsActiveHumanFaction)
 			{
 				for (int i = __instance.availableCouncilors.Count - 1; i >= 0; i--)
@@ -62,6 +62,6 @@ public class TIFactionState_GenerateRecruitableCouncilors_Patch
 						list[index].everBeenAvailable = true;
 					}
 				}
-			}
+			}*/
 		}
 }

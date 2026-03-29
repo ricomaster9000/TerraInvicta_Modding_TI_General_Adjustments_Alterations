@@ -188,8 +188,10 @@ public class TIHabSiteStateRandomizeSiteMiningDataPatch
                       "dailyGeneratedIncome = " + dailyGeneratedIncome + Environment.NewLine + 
                       "totalHabSites = " + totalHabSites + Environment.NewLine +
                       "objectType = " + objectType);
+
         int minDaysToLast = objectType switch
         {
+            SpaceObjectType.Star => 365*1*1000000,
             SpaceObjectType.Planet => 365*50,
             SpaceObjectType.DwarfPlanet => 365*20,
             SpaceObjectType.PlanetaryMoon => 365*20,

@@ -60,16 +60,20 @@ namespace TI_Augmenter
             }
             harmony = new Harmony(modEntry.Info.Id);
             applyUniversalGameStateListenerPatches(harmony);
+            
             if (Config.GetValueAsBool("nuclear_barrage_related_configurations_enabled"))
             {
+                logDebug("nuclear_barrage_related_configurations START");
                 var original = typeof(TIRegionState).GetMethod("ApplyDamageToRegion");
                 var prefix = typeof(ApplyDamageToRegionPatch).GetMethod("Prefix");
                 var postfix = typeof(ApplyDamageToRegionPatch).GetMethod("Postfix");
                 harmony.Patch(original, new HarmonyMethod(prefix), new HarmonyMethod(postfix));
+                logDebug("nuclear_barrage_related_configurations END");
             }
             
             if (Config.GetValueAsBool("faction_related_configurations_enabled"))
             {
+                logDebug("faction_related_configurations START");
                 var original = typeof(TIFactionState).GetMethod("GetMissionControlContributionFromHabs");
                 var postfix = typeof(MissionControlContributionFromHabs_Patch).GetMethod("GetMissionControlContributionFromHabs_Postfix");
                 harmony.Patch(original, null, new HarmonyMethod(postfix));
@@ -77,10 +81,12 @@ namespace TI_Augmenter
                 var original2 = typeof(TIHabModuleTemplate).GetMethod("MonthlyResourceIncome");
                 var prefix2 = typeof(MissionControlContributionFromHabs_Patch).GetMethod("MonthlyResourceIncome_Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
+                logDebug("faction_related_configurations END");
             }
 
             if (Config.GetValueAsBool("agent_follow_up_success_failure_modifiers_enabled"))
             {
+                logDebug("agent_follow_up_success_failure_modifiers START");
                 TIMissionResolutionPatch.setConfigVariables();
                 var original2 = typeof(TIMissionResolution_Contested).GetMethod("GetAllModifiers");
                 var postfix2 = typeof(TIMissionResolutionPatch).GetMethod("GetAllModifiers_Postfix");
@@ -90,10 +96,12 @@ namespace TI_Augmenter
                 var original6 = typeof(TIMissionState).GetMethod("ResolveMission");
                 var postfix6 = typeof(TIMissionStatePatch).GetMethod("ResolveMission_Postfix");
                 harmony.Patch(original6, null, new HarmonyMethod(postfix6));
+                logDebug("agent_follow_up_success_failure_modifiers END");
             }
 
             if (Config.GetValueAsBool("mission_related_slider_additions_enabled"))
             {
+                logDebug("mission_related_slider_additions START");
                 var original = typeof(AssignCouncilorToMission).GetMethod("Execute");
                 var postfix = typeof(AssignCouncilorToMission_Patch).GetMethod("Execute_MissionSliderAdjustments_PostFix");
                 harmony.Patch(original, null, new HarmonyMethod(postfix));
@@ -101,10 +109,12 @@ namespace TI_Augmenter
                 var original2 = typeof(TICouncilorState).GetMethod("GetPossibleMissionList");
                 var postfix2 = typeof(GetPossibleMissionList_Patch).GetMethod("GetPossibleMissionList_MissionSliderAdjustments_Postfix");
                 harmony.Patch(original2, null, new HarmonyMethod(postfix2));
+                logDebug("mission_related_slider_additions END");
             }
 
             if (Config.GetValueAsBool("agent_attributes_alterations_enabled"))
             {
+                logDebug("agent_attributes_alterations START");
                 TICouncilorState_RandomizeStats_Patch.setConfigVariables();
                 var original = typeof(TICouncilorState).GetMethod("RandomizeStats");
                 var prefix = typeof(TICouncilorState_RandomizeStats_Patch).GetMethod("Prefix");
@@ -114,9 +124,13 @@ namespace TI_Augmenter
                 var prefix2 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("Prefix");
                 harmony.Patch(original2, new HarmonyMethod(prefix2));
                 
-                var original3 = typeof(TIFactionState).GetMethod("get_maxRecruitableCandidates");
-                var prefix3 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("MaxRecruitableCandidatesPrefix");
-                harmony.Patch(original3, new HarmonyMethod(prefix3));
+                //var original3 = typeof(TIFactionState).GetMethod("get_maxRecruitableCandidates");
+                //var prefix3 = typeof(TICouncilorState_HireRecruitCost_Patch).GetMethod("MaxRecruitableCandidatesPrefix");
+                //harmony.Patch(original3, new HarmonyMethod(prefix3));
+
+                //TIGlobalConfig.globalConfig.maxFactionCouncilorCandidatePool = 12;
+                
+                logDebug("agent_attributes_alterations END");
             }
             
             /*if (Config.GetValueAsBool("debt_feature"))
@@ -132,6 +146,7 @@ namespace TI_Augmenter
 
             if (Config.GetValueAsBool("resource_depletion_enabled"))
             {
+                logDebug("resource_depletion START");
                 var original = typeof(TIHabSiteState).GetMethod("RandomizeSiteMiningData");
                 var postfix = typeof(TIHabSiteStateRandomizeSiteMiningDataPatch).GetMethod("RandomizeSiteMiningData_Postfix");
                 harmony.Patch(original, null, new HarmonyMethod(postfix));
@@ -143,10 +158,12 @@ namespace TI_Augmenter
                 var original3 = typeof(GameControl).GetMethod("Initialize");
                 var postfix3 = typeof(TIHabSiteStateRandomizeSiteMiningDataPatch).GetMethod("InitializeGamePostfix");
                 harmony.Patch(original3, null,new HarmonyMethod(postfix3));
+                logDebug("resource_depletion END");
             }
 
             if (Config.GetValueAsBool("remove_control_point_permanently_on_abandon_nation"))
             {
+                logDebug("remove_control_point_permanently_on_abandon_nation START");
                 var original = typeof(TINationState).GetMethod("SelfDisableControlPoints");
                 var prefix = typeof(TINationStatePermanentlyRemoveControlPointPatch).GetMethod("SelfDisableControlPointsPrefix");
                 harmony.Patch(original, new HarmonyMethod(prefix), null);
@@ -154,6 +171,7 @@ namespace TI_Augmenter
                 var startMissionPhaseOriginal = typeof(CouncilorMissionCanvasController).GetMethod("StartMissionPhase");
                 var startMissionPhasePostfix = typeof(StartMissionPhase_Patch).GetMethod("Postfix");
                 harmony.Patch(startMissionPhaseOriginal, null, new HarmonyMethod(startMissionPhasePostfix));
+                logDebug("remove_control_point_permanently_on_abandon_nation END");
             }
 
             return true;
@@ -193,6 +211,7 @@ namespace TI_Augmenter
 
         private static void applyUniversalGameStateListenerPatches(Harmony harmony)
         {
+            logDebug("applyUniversalGameStateListenerPatches START");
             var clearGameDataOriginal = typeof(ViewControl).GetMethod("ClearGameData");
             var clearGameDataPrefix = typeof(LoadGameOrStartGame_Patch).GetMethod("ClearGameData_Prefix");
             harmony.Patch(clearGameDataOriginal, new HarmonyMethod(clearGameDataPrefix));
@@ -212,6 +231,7 @@ namespace TI_Augmenter
             var loadAllGameStatesOriginal = typeof(GameStateManager).GetMethod("LoadAllGameStates");
             var loadAllGameStatesPrefix = typeof(LoadGameOrStartGame_Patch).GetMethod("LoadAllGameStatesPrefix");
             harmony.Patch(loadAllGameStatesOriginal, new HarmonyMethod(loadAllGameStatesPrefix));
+            logDebug("applyUniversalGameStateListenerPatches END");
         }
 
         public static void logDebug(string log)

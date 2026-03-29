@@ -12,193 +12,192 @@ namespace TI_Augmenter.augmentations.harmonypatches.regionstate
         {
 	        if (strength <= 0f || !nuclear) return true;
 
-			bool isHostileNuke = nuclear && (applyingNation == null || applyingNation.enemies.Contains(__instance.nation));
-
-			double gdpDamage;
-			float populationDamage;
-			
-			// ===== NUCLEAR DAMAGE START =====
-			gdpDamage = -1.0 * __instance.nationalGDPShareValue * strength * (0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (isHostileNuke ? 0.7 : 0.2);
-			gdpDamage += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, (float)gdpDamage);
-			gdpDamage *= Config.GetValueAsFloat("nuclear_GDP_damage_to_target_nation_multiplier");
-
-			populationDamage = -1f * __instance.populationInMillions * strength * ((0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (isHostileNuke ? 0.25f : 0.025f));
-			populationDamage += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, populationDamage);
-			//populationDamage *= Config.GetValueAsFloat("nuclear_population_damage_to_target_nation_multiplier");
-			__instance.nation.AddToSustainability(__instance.NationalGDPProportion() * strength * (0.075f + UnityEngine.Random.Range(0f, 0.05f)) * (isHostileNuke ? 1f : 0.05f));
-			// ===== NUCLEAR DAMAGE END =====
-
-				__instance.nation.ModifyGDP(gdpDamage, TINationState.GDPChangeReason.GDPReason_RegionDamage);
-			__instance.ChangePopulation_Millions(populationDamage * Config.GetValueAsFloat("nuclear_population_damage_to_target_nation_multiplier"));
-
-			if (-populationDamage > 0.1f && applyingFaction != null)
+			bool flag = applyingNation == null || applyingNation.enemies.Contains(__instance.nation);
+			double num;
+			float num2;
+			num = -1.0 * __instance.nationalGDPShareValue * (double)strength * (double)(0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (flag ? 0.7 : 0.20000000298023224);
+	        num += (double)TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, (float)num, null);
+	        num *= Config.GetValueAsFloat("nuclear_GDP_damage_to_target_nation_multiplier");
+	        
+	        num2 = -1f * __instance.populationInMillions * strength * ((0.75f + UnityEngine.Random.Range(0f, 0.5f)) * (flag ? 0.25f : 0.025f));
+	        num2 += TIEffectsState.SumEffectsModifiers(Context.NuclearStrikeDamageReduction, __instance, num2, null);
+	        num2 *= Config.GetValueAsFloat("nuclear_population_damage_to_target_nation_multiplier");
+	        
+	        
+	        __instance.nation.AddToSustainability(__instance.NationalGDPProportion() * strength * (0.075f + UnityEngine.Random.Range(0f, 0.05f)) * (flag ? 1f : 0.05f));
+	        __instance.nation.ModifyGDP(num, TINationState.GDPChangeReason.GDPReason_RegionDamage);
+			__instance.ChangePopulation_Millions(num2, true);
+			if (applyingFaction != null)
 			{
-				// ===== NUCLEAR DAMAGE START =====
-				int multiplier = (isHostileNuke && applyingNation != null && !__instance.nation.alienNation &&
-					applyingNation.defensiveWarStates.None((TIWarState x) => x.attackingAlliance.Contains(__instance.nation))) ? 10 : 1;
-
-				applyingFaction.CommitAtrocity((int)Mathf.Clamp(-populationDamage * 10f * multiplier, 1f, 20f),
-					TIFactionState.AtrocityCause.MassCasualtiesfromRegionDamage);
-				// ===== NUCLEAR DAMAGE END =====
+				int num3 = (flag && applyingNation != null && !__instance.nation.alienNation && applyingNation.defensiveWarStates.None((TIWarState x) => x.attackingAlliance.Contains(__instance.nation))) ? 10 : 1;
+				applyingFaction.CommitAtrocity((int)Mathf.Clamp(-num2 * 10f * (float)num3, 1f, 20f), TIFactionState.AtrocityCause.MassCasualtiesfromRegionDamage, false, 0.333f);
 			}
-
 			if (strength >= 0.9f)
 			{
-				if (nuclear)
+				float num4 = __instance.GlobalGDPProportion() * (flag ? 1f : 0.2f) * 0.25f;
+				num4 *= Config.GetValueAsFloat("nuclear_GDP_damage_global_multiplier");
+				
+				foreach (TINationState tinationState in GameStateManager.AllExtantHumanNations())
 				{
-					// ===== NUCLEAR DAMAGE START =====
-					float globalGDPDamage = __instance.GlobalGDPProportion() * (isHostileNuke ? 1f : 0.2f) * 0.25f;
-					globalGDPDamage *= Config.GetValueAsFloat("nuclear_GDP_damage_global_multiplier");
-					foreach (TINationState nation in GameStateManager.AllExtantHumanNations())
+					tinationState.GDPPctChange(-1f * (num4 + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f), TINationState.GDPChangeReason.GDPReason_RegionDamage);
+				}
+				foreach (TIFactionState tifactionState in GameStateManager.AllHumanFactions())
+				{
+					foreach (TICouncilorState ticouncilorState in tifactionState.councilors)
 					{
-						nation.GDPPctChange(-1f * (globalGDPDamage + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f),
-							TINationState.GDPChangeReason.GDPReason_RegionDamage);
-					}
-
-					foreach (TIFactionState faction in GameStateManager.AllHumanFactions())
-					{
-						foreach (TICouncilorState councilor in faction.councilors)
+						if (ticouncilorState.homeRegion == __instance)
 						{
-							if (councilor.homeRegion == __instance)
-							{
-								TITraitTemplate.ProcessLoyaltyChangeFromTraits(councilor, SpecialTraitRule.LoyaltyLossOnHomeRegionNuked,
-									(applyingFaction == faction) ? 2 : 1);
-							}
+							TITraitTemplate.ProcessLoyaltyChangeFromTraits(ticouncilorState, SpecialTraitRule.LoyaltyLossOnHomeRegionNuked, (applyingFaction == tifactionState) ? 2 : 1);
 						}
 					}
-					// ===== NUCLEAR DAMAGE END =====
 				}
-
-				if (__instance.coreEconomicRegion && isHostileNuke)
+				if (flag)
 				{
-					// ===== NUCLEAR DAMAGE START =====
-					__instance.coreEconomicRegion = false;
-					GameControl.eventManager.TriggerEvent(new MajorRegionStatusChange(__instance), null, new object[] { __instance });
-					foreach (TINationState nation in GameStateManager.AllExtantHumanNations())
+					if (__instance.coreEconomicRegion)
 					{
-						float globalGDPDamageBecauseOfCoreRegionModifier = -1f * (0.025f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f);
-						globalGDPDamageBecauseOfCoreRegionModifier *= Config.GetValueAsFloat("nuclear_GDP_damage_global_because_of_core_region_multiplier");
-						nation.GDPPctChange(globalGDPDamageBecauseOfCoreRegionModifier, TINationState.GDPChangeReason.GDPReason_GlobalCoreEconomicRegionDestroyed);
+						__instance.coreEconomicRegion = false;
+						GameControl.eventManager.TriggerEvent(new MajorRegionStatusChange(__instance), null, new object[]
+						{
+							__instance
+						});
+						using (IEnumerator<TINationState> enumerator = GameStateManager.AllExtantHumanNations().GetEnumerator())
+						{
+							while (enumerator.MoveNext())
+							{
+								TINationState tinationState2 = enumerator.Current;
+								float globalGDPDamageBecauseOfCoreRegionModifier = -1f * (0.025f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f);
+								globalGDPDamageBecauseOfCoreRegionModifier *= Config.GetValueAsFloat("nuclear_GDP_damage_global_because_of_core_region_multiplier");
+								tinationState2.GDPPctChange(globalGDPDamageBecauseOfCoreRegionModifier, TINationState.GDPChangeReason.GDPReason_GlobalCoreEconomicRegionDestroyed);
+							}
+							goto IL_457;
+						}
 					}
-					// ===== NUCLEAR DAMAGE END =====
-				}
-				else if (__instance.coreResourceRegion && isHostileNuke)
-				{
-					// ===== NUCLEAR DAMAGE START =====
-					__instance.resourceRegion = false;
-					__instance.oilRegion = false;
-					GameControl.eventManager.TriggerEvent(new MajorRegionStatusChange(__instance), null, new object[] { __instance });
-					foreach (TINationState nation in GameStateManager.AllExtantHumanNations())
+					if (__instance.coreResourceRegion)
 					{
-						float globalGDPDamageBecauseOfCoreRegionModifier = -1f * (0.015f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f);
-						globalGDPDamageBecauseOfCoreRegionModifier *= Config.GetValueAsFloat("nuclear_GDP_damage_global_because_of_core_region_multiplier");
-						nation.GDPPctChange(globalGDPDamageBecauseOfCoreRegionModifier, TINationState.GDPChangeReason.GDPReason_GlobalCoreResourceRegionDestroyed);
+						__instance.resourceRegion = false;
+						__instance.oilRegion = false;
+						GameControl.eventManager.TriggerEvent(new MajorRegionStatusChange(__instance), null, new object[]
+						{
+							__instance
+						});
+						foreach (TINationState tinationState3 in GameStateManager.AllExtantHumanNations())
+						{
+							float globalGDPDamageBecauseOfCoreRegionModifier = -1f * (0.015f + (UnityEngine.Random.value + UnityEngine.Random.value) / 100f);
+							globalGDPDamageBecauseOfCoreRegionModifier *= Config.GetValueAsFloat("nuclear_GDP_damage_global_because_of_core_region_multiplier");
+							tinationState3.GDPPctChange(globalGDPDamageBecauseOfCoreRegionModifier, TINationState.GDPChangeReason.GDPReason_GlobalCoreResourceRegionDestroyed);
+						}
 					}
-					// ===== NUCLEAR DAMAGE END =====
+					IL_457:
+					__instance.accumulatedCoreEconomyRegionTriggers = 0;
+					__instance.accumulatedCoreMiningRegionTriggers = 0;
+					__instance.accumulatedCoreOilRegionTriggers = 0;
+					__instance.accumulatedDecolonizeTriggers = 0;
+					__instance.accumulatedDecontaminateTriggers = 0;
 				}
+				foreach (PriorityType priorityType in Enums.PriorityTypes)
+				{
+					if (priorityType - PriorityType.Unity > 1 && priorityType != PriorityType.Spoils)
+					{
+						__instance.nation.ModifyAccumulatedInvestment(priorityType, 1f - strength, true, false);
+					}
+				}
+				__instance.nation.SetDataDirty();
 			}
-
-			if (strength >= 0.75f && applyingNation != __instance.nation)
+			else if (UnityEngine.Random.value < strength * 5f)
 			{
-				__instance.DestroySpaceAssets(true);
+				__instance.nation.ModifyAccumulatedInvestment(__instance.nation.GetRandomPriorityToDamage(), __instance.colonyRegion ? (1f - strength * 0.5f) : (1f - strength), true, true);
 			}
-			else
+			if (applyingNation != __instance.nation)
 			{
-				__instance.nation.ChangeAnnualSpaceFundingValue(-1f * (__instance.NationalGDPProportion() * __instance.nation.spaceFunding_year * strength * (nuclear ? 0.5f : 0.1f)));
-
-				if (__instance.boostPerMonth_dekatons > 0f && (UnityEngine.Random.value < strength || forceAttackSpaceAssets))
+				__instance.nation.ChangeAnnualSpaceFundingValue(-1f * (__instance.NationalGDPProportion() * __instance.nation.spaceFunding_year * strength * 0.5f));
+				if (strength >= 0.75f)
 				{
-					__instance.ChangeSpaceFacilityValue(SpaceFacilityType.launchFacility, -(__instance.boostPerYear_dekatons * strength), false, true);
+					__instance.DestroySpaceAssets(true);
 				}
-				if (__instance.missionControl > 0 && (UnityEngine.Random.value < strength || forceAttackSpaceAssets))
+				else
 				{
-					__instance.ChangeSpaceFacilityValue(SpaceFacilityType.missionControlFacility, -1f, false, true);
-				}
-				if (__instance.antiSpaceDefenses && (UnityEngine.Random.value < strength || forceAttackSpaceAssets))
-				{
-					__instance.ChangeSpaceFacilityValue(SpaceFacilityType.spaceDefenseFacility, 0f, false, true);
+					if (__instance.boostPerMonth_dekatons > 0f && (UnityEngine.Random.value < strength || forceAttackSpaceAssets))
+					{
+						__instance.ChangeSpaceFacilityValue(SpaceFacilityType.launchFacility, -(__instance.boostPerYear_dekatons * strength), false, true);
+					}
+					if (__instance.missionControl > 0 && (UnityEngine.Random.value < strength || forceAttackSpaceAssets))
+					{
+						__instance.ChangeSpaceFacilityValue(SpaceFacilityType.missionControlFacility, -1f, false, true);
+					}
+					if (__instance.antiSpaceDefenses && (UnityEngine.Random.value < strength || forceAttackSpaceAssets))
+					{
+						__instance.ChangeSpaceFacilityValue(SpaceFacilityType.spaceDefenseFacility, 0f, false, true);
+					}
 				}
 			}
-
 			if (includeArmies)
 			{
-				List<TIArmyState> armiesToDamage = __instance.armies.Where(army =>
-					(army.homeNation != applyingNation) &&
-					(applyingNation == null || !applyingNation.allies.Contains(army.homeNation)) &&
-					(applyingFaction == null || army.faction != applyingFaction)).ToList();
-
-				if (applyingFaction == null || !applyingFaction.IsAlienFaction)
+				List<TIArmyState> list = __instance.armies.Where(delegate(TIArmyState army)
 				{
-					armiesToDamage.AddRange(__instance.MegafaunaArmiesPresent());
-				}
-
-				armiesToDamage = armiesToDamage.OrderByDescending(x => x.strength * x.techLevel).ToList();
-
-				for (int j = armiesToDamage.Count - 1; j >= 0; j--)
-				{
-					if (nuclear && j > 0)
+					if (army.homeNation != applyingNation && !army.atSea)
 					{
-						// ===== NUCLEAR DAMAGE START =====
-						float nuclearStrength = strength;
-
-						if (armiesToDamage[j].AlienRegularArmy || (Mathd.d100() < 50 && armiesToDamage[j].techLevel >= 3.8f))
+						TINationState applyingNation2 = applyingNation;
+						if (applyingNation2 == null || !applyingNation2.allies.Contains(army.homeNation))
 						{
-							float techReduction = Mathf.Max(armiesToDamage[j].techLevel - 3.79f, 0f) * UnityEngine.Random.Range(1f, 5f);
-							nuclearStrength -= techReduction / 100f;
+							return army.faction != applyingFaction || applyingFaction == null;
 						}
-
-						nuclearStrength = Mathf.Max(nuclearStrength, 0f);
-						nuclearStrength += TIEffectsState.SumEffectsModifiers(Context.ArmyNuclearHardening, armiesToDamage[j].faction, nuclearStrength);
-
-						armiesToDamage[j].TakeDamage(nuclearStrength, applyingFaction, applyingNation);
-						// ===== NUCLEAR DAMAGE END =====
+					}
+					return false;
+				}).ToList<TIArmyState>();
+				TIFactionState applyingFaction2 = applyingFaction;
+				if (applyingFaction2 == null || !applyingFaction2.IsAlienFaction)
+				{
+					list.AddRange(__instance.MegafaunaArmiesPresent());
+				}
+				list = (from x in list
+				orderby x.strength * x.techLevel descending
+				select x).ToList<TIArmyState>();
+				for (int j = list.Count - 1; j >= 0; j--)
+				{
+					if (j > 0)
+					{
+						float num5 = strength;
+						if (list[j].AlienRegularArmy || (Mathd.d100() < 50 && list[j].techLevel >= 3.8f))
+						{
+							float num6 = Mathf.Max(list[j].techLevel - 3.79f, 0f) * UnityEngine.Random.Range(1f, 5f);
+							num5 -= num6 / 100f;
+						}
+						num5 = Mathf.Max(num5, 0f);
+						num5 += TIEffectsState.SumEffectsModifiers(Context.ArmyNuclearHardening, list[j].faction, num5, null);
+						list[j].TakeDamage(num5, applyingFaction, applyingNation, false);
 					}
 					else
 					{
-						armiesToDamage[j].TakeDamage(strength, applyingFaction, applyingNation);
+						list[j].TakeDamage(strength, applyingFaction, applyingNation, !nuclear);
 					}
 				}
-
-				if (nuclear)
+				TIArmyState[] array2 = (from x in __instance.armies
+				where !x.atSea
+				select x).Except(list).ToArray<TIArmyState>();
+				for (int k = array2.Length - 1; k >= 0; k--)
 				{
-					// ===== NUCLEAR DAMAGE START =====
-					TIArmyState[] others = __instance.armies.Except(armiesToDamage).ToArray();
-					for (int k = others.Length - 1; k >= 0; k--)
-					{
-						others[k].TakeDamage(strength / (48f + UnityEngine.Random.Range(0f, 4f)), applyingFaction, applyingNation);
-					}
-					// ===== NUCLEAR DAMAGE END =====
+					array2[k].TakeDamage(strength / (48f + UnityEngine.Random.Range(0f, 4f)), applyingFaction, applyingNation, false);
 				}
 			}
-
 			if (includeCouncilors)
 			{
-				foreach (TICouncilorState councilor in __instance.GetCouncilorsInRegion())
+				foreach (TICouncilorState ticouncilorState2 in __instance.GetCouncilorsInRegion())
 				{
-					if (councilor.traits.None(trait => trait.specialTraitRule == SpecialTraitRule.Survivor) &&
-						UnityEngine.Random.Range(0f, 2f) < strength)
+					if (ticouncilorState2.traits.None((TITraitTemplate x) => x.specialTraitRule == SpecialTraitRule.Survivor) && UnityEngine.Random.Range(0f, 2f) < strength)
 					{
-						TINotificationQueueState.LogCouncilorKilledInAttack(councilor, councilor.location);
-						councilor.KillCouncilor(true, applyingFaction);
+						TINotificationQueueState.LogCouncilorKilledInAttack(ticouncilorState2, ticouncilorState2.location);
+						ticouncilorState2.KillCouncilor(true, applyingFaction);
 					}
 				}
 			}
-
-			if (nuclear)
+			__instance.xenoforming.SetXenoformingLevel(0f);
+			TIGlobalValuesState.GlobalValues.TriggerNuclearDetonationEffect(true, applyingNation, __instance, __instance.nation);
+			GameControl.eventManager.TriggerEvent(new RegionNuked(__instance), null, new object[]
 			{
-				// ===== NUCLEAR DAMAGE START =====
-				__instance.xenoforming.SetXenoformingLevel(0f);
-				TIGlobalValuesState.GlobalValues.TriggerNuclearDetonationEffect(true, applyingNation, __instance, __instance.nation);
-				// ===== NUCLEAR DAMAGE END =====
-			}
-			else if (applyingFaction == null || (!applyingFaction.IsAlienFaction && !applyingFaction.IsAlienProxy))
-			{
-				__instance.xenoforming.ChangeXenoformingLevel(-(__instance.xenoforming.xenoformingLevel * strength));
-			}
-
+				__instance
+			});
 			GameControl.eventManager.TriggerEvent(new RegionDamaged(__instance), null, new object[] { __instance });
 			GameControl.eventManager.TriggerEvent(new RegionDataUpdated(__instance), null, new object[] { __instance });
-
 			return false;
         }
 	    

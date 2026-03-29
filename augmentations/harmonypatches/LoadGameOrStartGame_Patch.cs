@@ -13,7 +13,7 @@ namespace TI_Augmenter.augmentations.harmonypatches
         public static bool ClearGameData_Prefix()
         {
             Config.GameStartedOrLoaded = true;
-            Console.WriteLine("Game Loaded or New Game started");
+            Main.logDebug("Game Loaded or New Game started");
             // load resource totals
             
             return true;
@@ -23,7 +23,7 @@ namespace TI_Augmenter.augmentations.harmonypatches
         {   
             Log.Time("AssetBundleManager Initialize", new Action(AssetBundleManager.Initialize));
             Config.GameAssetsLoaded = true;
-            Console.WriteLine("Game Assets fully loaded");
+            Main.logDebug("Game Assets fully loaded");
             Main.ApplyAdditionalPatchesAffectingGameAssets();
             return false;
         }

@@ -17,6 +17,7 @@ namespace TI_Augmenter.augmentations.harmonypatches.nationstate
                     if (ticontrolPoint.faction == faction)
                     {
                         ControlPointsToRemove.Add(ticontrolPoint);
+                        Main.logDebug(ticontrolPoint.displayName + " added for removal at next mission start phase");
                     }
                 }
 
