@@ -14,7 +14,7 @@ namespace TI_Augmenter.augmentations.harmonypatches.nationstate
             {
                 foreach (TIControlPoint ticontrolPoint in __instance.controlPoints)
                 {
-                    if (ticontrolPoint.faction == faction)
+                    if (ticontrolPoint.faction == faction && faction.permaAbandonedNations.Contains(__instance))
                     {
                         ControlPointsToRemove.Add(ticontrolPoint);
                         Main.logDebug(ticontrolPoint.displayName + " added for removal at next mission start phase");
