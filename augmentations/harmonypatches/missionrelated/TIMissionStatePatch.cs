@@ -30,11 +30,7 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated
                     {
                         FollowUpFailureModifier.GetFollowUpFailuresHolder().Add(keyName, 0);
                     }
-                    if (TITimeState.Now().DifferenceInDays(FollowUpFailureModifier.GetFollowUpFailuresLastFailedDateHolder()[keyName]) > 56)
-                    {
-                        Main.logDebug("TIMissionStatePatch - ResolveMission_Postfix: follow-up-failures-change - Resetting agent's success decrease modifier to 0. AgentDetails: " + keyName + " " + __result.councilor.displayName);
-                        FollowUpFailureModifier.GetFollowUpFailuresHolder()[keyName] = 0;
-                    }
+                    
                     if (FollowUpFailureModifier.GetFollowUpFailuresHolder()[keyName] < agent_follow_up_failures_decrease_chances_of_success_max_count)
                     {
                         FollowUpFailureModifier.GetFollowUpFailuresHolder()[keyName]++;
@@ -51,11 +47,6 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated
                     if (!FollowUpSuccessModifier.GetFollowUpSuccessHolder().ContainsKey(keyName))
                     {
                         FollowUpSuccessModifier.GetFollowUpSuccessHolder().Add(keyName, 0);
-                    }
-                    if (TITimeState.Now().DifferenceInDays(FollowUpSuccessModifier.GetFollowUpSuccessesLastSucceededDateHolder()[keyName]) > 56)
-                    {
-                        Main.logDebug("TIMissionStatePatch - ResolveMission_Postfix: follow-up-successes-change - Resetting agent's success decrease modifier to 0. AgentDetails: " + keyName + " " + __result.councilor.displayName);
-                        FollowUpSuccessModifier.GetFollowUpSuccessHolder()[keyName] = 0;
                     }
                     if (FollowUpSuccessModifier.GetFollowUpSuccessHolder()[keyName] < agent_follow_up_successes_decrease_chances_of_success_max_count)
                     {

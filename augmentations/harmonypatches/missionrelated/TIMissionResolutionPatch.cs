@@ -23,9 +23,16 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated
                 float totalSumFromModifiers;
                 float decreaseBy;
 
-                if (FollowUpFailureModifier.GetFollowUpFailuresHolder().ContainsKey(keyName))
+                if (FollowUpFailureModifier.GetFollowUpFailuresHolder().ContainsKey(keyName) && FollowUpFailureModifier.GetFollowUpFailuresHolder()[keyName] > 0)
                 {
                     Main.logDebug("TIMissionResolutionPatch - GetAllModifiers_Postfix: Handling mission success change decrease for agent because of failures, AgentDetails: " + keyName + " " + councilor.displayName);
+                    
+                    if (TITimeState.Now().DifferenceInDays(FollowUpFailureModifier.GetFollowUpFailuresLastFailedDateHolder()[keyName]) > 56)
+                    {
+                        Main.logDebug("TIMissionResolutionPatch - GetAllModifiers_Postfix: follow-up-failures-change - Resetting agent's success decrease modifier to 0. AgentDetails: " + keyName + " " + councilor.displayName);
+                        FollowUpFailureModifier.GetFollowUpFailuresHolder()[keyName] = 0;
+                    }
+                    
                     totalSumFromModifiers = GetTotalModifierFromModifiers(__result, mission, attacking, councilor, target, resourcesSpent);
                     if (totalSumFromModifiers > 0)
                     {
@@ -39,9 +46,15 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated
                     Main.logDebug("TIMissionResolutionPatch - GetAllModifiers_Postfix: decreaseBy -> " + decreaseBy);
                     __result.Add(new FollowUpFailureModifier(decreaseBy));
                 }
-                if (FollowUpSuccessModifier.GetFollowUpSuccessHolder().ContainsKey(keyName))
+                if (FollowUpSuccessModifier.GetFollowUpSuccessHolder().ContainsKey(keyName)  && FollowUpSuccessModifier.GetFollowUpSuccessHolder()[keyName] > 0)
                 {
                     Main.logDebug("TIMissionResolutionPatch - GetAllModifiers_Postfix: Handling mission success change decrease for agent because of successes, AgentDetails: " + keyName + " " + councilor.displayName);
+                    if (TITimeState.Now().DifferenceInDays(FollowUpSuccessModifier.GetFollowUpSuccessesLastSucceededDateHolder()[keyName]) > 56)
+                    {
+                        Main.logDebug("TIMissionResolutionPatch - GetAllModifiers_Postfix: follow-up-successes-change - Resetting agent's success decrease modifier to 0. AgentDetails: " + keyName + " " + councilor.displayName);
+                        FollowUpSuccessModifier.GetFollowUpSuccessHolder()[keyName] = 0;
+                    }
+                    
                     totalSumFromModifiers = GetTotalModifierFromModifiers(__result, mission, attacking, councilor, target, resourcesSpent);
                     if (totalSumFromModifiers > 0)
                     {
