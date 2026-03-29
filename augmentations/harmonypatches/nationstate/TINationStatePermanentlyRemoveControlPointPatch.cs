@@ -14,10 +14,18 @@ namespace TI_Augmenter.augmentations.harmonypatches.nationstate
             {
                 foreach (TIControlPoint ticontrolPoint in __instance.controlPoints)
                 {
-                    if (ticontrolPoint.faction == faction && faction.permaAbandonedNations.Contains(__instance))
+                    if (ticontrolPoint.faction == faction)
                     {
-                        ControlPointsToRemove.Add(ticontrolPoint);
-                        Main.logDebug(ticontrolPoint.displayName + " added for permanent removal at next mission start phase");
+                        if (faction.permaAbandonedNations.Contains(__instance))
+                        {
+                            ControlPointsToRemove.Add(ticontrolPoint);
+                            Main.logDebug(ticontrolPoint.displayName + " added for permanent removal at next mission start phase");
+                        }
+                        else
+                        {
+                            Main.logDebug("applied normal crackdown effect for " + ticontrolPoint.displayName);
+                            ticontrolPoint.ResolveCrackdownEffect(TemplateManager.global.selfDisableControlPointDuration_months, faction, true, false, 0f);
+                        }
                     }
                 }
 
