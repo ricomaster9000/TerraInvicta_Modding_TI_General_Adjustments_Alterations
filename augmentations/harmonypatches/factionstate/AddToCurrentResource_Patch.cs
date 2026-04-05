@@ -45,27 +45,29 @@ public class AddToCurrentResource_Patch
                     resourceSiteInfo.substractFromTotalRemaining(substractAmount);
                     Main.logDebug("ResourceDepletion -> Subtracted " + substractAmount + ", total remaining = " + resourceSiteInfo.getTotalRemaining());
 
-                    if (resourceSiteInfo.getTotalRemaining() <= 0)
+                    if (resourceSiteInfo.getTotalRemaining() <= 0 && !resourceSiteInfo.getDepleted())
                     {
-                        Main.logDebug("ResourceDepletion -> Nullifying hab site potential income for resourceType " + resourceType);
+                        Main.logDebug("ResourceDepletion -> Vastly reducing hab site potential income for resourceType " + resourceType + ", recycling mode activated");
                         switch (resourceType)
                         {
                             case FactionResource.Fissiles:
-                                hab.habSite.fissiles_day = 0;
+                                hab.habSite.fissiles_day = (float)Math.Round(hab.habSite.fissiles_day * 0.08f,3);
                                 break;
                             case FactionResource.Metals:
-                                hab.habSite.metals_day = 0;
+                                hab.habSite.metals_day = (float)Math.Round(hab.habSite.metals_day * 0.25f,3);
                                 break;
                             case FactionResource.Water:
-                                hab.habSite.water_day = 0;
+                                hab.habSite.water_day = (float)Math.Round(hab.habSite.water_day * 0.20f,3);
                                 break;
                             case FactionResource.NobleMetals:
-                                 hab.habSite.nobles_day = 0;
+                                hab.habSite.nobles_day = (float)Math.Round(hab.habSite.nobles_day * 0.04f,3);
                                 break;
                             case FactionResource.Volatiles:
-                                hab.habSite.volatiles_day = 0;
+                                hab.habSite.volatiles_day = (float)Math.Round(hab.habSite.volatiles_day * 0.06f,3);
                                 break;
                         }
+                        resourceSiteInfo.setDepleted(true);
+                        EventManager.LogAndNotifyHabResourcesDepleted(hab.faction,hab);
                     }
                 }
             }

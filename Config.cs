@@ -13,6 +13,7 @@ namespace TI_Augmenter
         private static Dictionary<String, Object> _configValues = new Dictionary<string, object>();
         public static bool GameStartedOrLoaded = false;
         public static bool GameAssetsLoaded = false;
+        public static bool isDebugModeActive = false;
         public static void LoadValues() {
             // DEFAULT MODIFICATIONS START
             String currentAssemblyFullPathDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -107,7 +108,14 @@ namespace TI_Augmenter
                 if (Boolean.TryParse(entry.Value, out newBoolVal))
                 {
                     Main.logDebug("configuration param added as boolean");
-                    _configValues[entry.Key] = newBoolVal;
+                    if (entry.Key == "enable_debug_mode")
+                    {
+                        isDebugModeActive = newBoolVal;
+                    }
+                    else
+                    {
+                        _configValues[entry.Key] = newBoolVal;
+                    }
                 }
                 else
                 {
@@ -143,7 +151,7 @@ namespace TI_Augmenter
 
         public static bool IsDebugModeActive()
         {
-            return (bool)getConfigValues().GetValueSafe("enable_debug_mode");
+            return isDebugModeActive;
         }
         
         public static bool isKeySet(string key)

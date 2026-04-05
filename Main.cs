@@ -47,6 +47,7 @@ namespace TI_Augmenter
             }
             if (!Config.GetValueAsBool("extended_installation_completed") || gameHasBeenUpdatedRerunExtendedInstall)
             {
+                logDebug("Start Extended Installs process");
                 var psi = new ProcessStartInfo();
                 psi.CreateNoWindow = true;
                 psi.FileName = Path.GetFullPath( modEntry.Path+"\\EXTENDED_INSTALL.bat");
@@ -248,6 +249,16 @@ namespace TI_Augmenter
             if (!float.TryParse(valueAsString, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
             {
                 throw new InvalidCastException("could not cast value to float");
+            }
+            return result;
+        }
+        
+        private static bool ValueAsBoolean(String valueAsString)
+        {
+            bool result;
+            if (!bool.TryParse(valueAsString, out result))
+            {
+                throw new InvalidCastException("could not cast value to bool");
             }
             return result;
         }

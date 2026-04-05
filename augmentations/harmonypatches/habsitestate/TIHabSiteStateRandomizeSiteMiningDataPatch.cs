@@ -13,10 +13,19 @@ public class ResourceSiteTotalInfo
 {
     private float totalInitial;
     private float totalRemaining;
-
+    private bool depleted;
+    
     public ResourceSiteTotalInfo(float totalRemaining)
     {
         this.totalRemaining = totalRemaining;
+        this.depleted = totalRemaining <= 0.00;
+    }
+
+    public ResourceSiteTotalInfo(float totalInitial, float totalRemaining, bool depleted = false)
+    {
+        this.totalInitial = totalInitial;
+        this.totalRemaining = totalRemaining;
+        this.depleted = depleted;
     }
 
     public float getTotalInitial()
@@ -43,7 +52,17 @@ public class ResourceSiteTotalInfo
     {
         this.totalRemaining -= toSubstract;
     }
-}
+
+    public void setDepleted(bool depleted)
+    {
+        this.depleted = depleted;
+    }
+
+    public bool getDepleted()
+    {
+        return this.depleted;
+    }
+} 
 
 public class TIHabSiteStateRandomizeSiteMiningDataPatch
 {

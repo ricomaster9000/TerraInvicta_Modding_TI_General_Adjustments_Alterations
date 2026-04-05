@@ -1,0 +1,16 @@
+[{
+   "dataName": "HabResourcesDepleted",
+   "alertHammerLoc": "UI.Notifications.MissionControl",
+   "disable": false,
+   "allowAnyChanges": true,
+   "allowAlertChanges": true,
+   "alertAudience": "PrimaryFactions",
+   "firstAlertOverride": false,
+   "newsFeedAudience": "RelevantFactions",
+   "timerAudience": "None",
+   "summaryAudience": {
+      "audience": "RelevantFactions",
+      "category": "SpaceEvents"
+   },
+   "stacking": "None"
+}]

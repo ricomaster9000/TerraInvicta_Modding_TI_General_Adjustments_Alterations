@@ -73,6 +73,7 @@
     
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="augmentations\EventManager.cs" />
     <Compile Include="augmentations\harmonypatches\councilorstate\TICouncilorState_HireRecruitCost_Patch.cs" />
     <Compile Include="augmentations\harmonypatches\councilorstate\TICouncilorState_RandomizeStats_Patch.cs" />
     <Compile Include="augmentations\harmonypatches\councilorstate\TIFactionState_GenerateRecruitableCouncilors_Patch.cs" />

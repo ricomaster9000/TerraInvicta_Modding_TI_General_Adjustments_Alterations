@@ -19,6 +19,7 @@ public class StartMissionPhase_Patch
             Main.logDebug("Remove-Control-Points-On-Abandon-Nation -> removing control points from nation");
             foreach (TIControlPoint controlPoint in TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove)
             {
+                //controlPoint.ResolveCrackdownEffect(TemplateManager.global.selfDisableControlPointDuration_months, controlPoint.faction, true, false, 0f);
                 controlPoint.SetFaction(null, false);
             }
             TINationStatePermanentlyRemoveControlPointPatch.ControlPointsToRemove.Clear();

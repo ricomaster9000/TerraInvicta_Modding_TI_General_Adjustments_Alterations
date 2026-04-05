@@ -72,7 +72,15 @@ public class ResourceDepletion_DetailDisplayNamePatch
             var resourceDict = TIHabSiteStateRandomizeSiteMiningDataPatch.HabSiteToTotalResources;
 
             float GetRemaining(FactionResource res) => resourceDict.ContainsKey(siteId + res) ? resourceDict[siteId + res].getTotalRemaining() : 0f;
-            bool IsDepleted(FactionResource res) => GetRemaining(res) <= 0f;
+            bool IsDepleted(FactionResource res)
+            {
+                bool isDepleted = GetRemaining(res) <= 0f;
+                if (isDepleted)
+                {
+                    Main.logDebug("Showing that " + res + " is depleted 'EMPTY' for " + siteId);
+                }
+                return isDepleted;
+            }
 
             if (__instance.habToDisplay.mine != null && __instance.habToDisplay.mine.active)
             {
@@ -80,16 +88,12 @@ public class ResourceDepletion_DetailDisplayNamePatch
                 
                 __instance.siteWater.SetText(IsDepleted(FactionResource.Water) ? emptyText:
                     TIUtilities.FormatSmallNumber(__instance.habToDisplay.mine.moduleTemplate.GetMiningIncome_Month(__instance.activePlayer, __instance.habToDisplay.habSite, FactionResource.Water), 7, 0, true, false));
-
                 __instance.siteVolatiles.SetText(IsDepleted(FactionResource.Volatiles) ? emptyText :
                     TIUtilities.FormatSmallNumber(__instance.habToDisplay.mine.moduleTemplate.GetMiningIncome_Month(__instance.activePlayer, __instance.habToDisplay.habSite, FactionResource.Volatiles), 7, 0, true, false));
-
                 __instance.siteMetals.SetText(IsDepleted(FactionResource.Metals) ? emptyText :
                     TIUtilities.FormatSmallNumber(__instance.habToDisplay.mine.moduleTemplate.GetMiningIncome_Month(__instance.activePlayer, __instance.habToDisplay.habSite, FactionResource.Metals), 7, 0, true, false));
-
                 __instance.siteNobles.SetText(IsDepleted(FactionResource.NobleMetals) ? emptyText :
                     TIUtilities.FormatSmallNumber(__instance.habToDisplay.mine.moduleTemplate.GetMiningIncome_Month(__instance.activePlayer, __instance.habToDisplay.habSite, FactionResource.NobleMetals), 7, 0, true, false));
-
                 __instance.siteFissiles.SetText(IsDepleted(FactionResource.Fissiles) ? emptyText :
                     TIUtilities.FormatSmallNumber(__instance.habToDisplay.mine.moduleTemplate.GetMiningIncome_Month(__instance.activePlayer, __instance.habToDisplay.habSite, FactionResource.Fissiles), 7, 0, true, false));
             }

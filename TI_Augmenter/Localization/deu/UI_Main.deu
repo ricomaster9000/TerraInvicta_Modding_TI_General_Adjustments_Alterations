@@ -1,3 +1,6 @@
 UI.TI_Augmenter.FollowUpSuccessModifier=Nachfolge-Erfolgsmodifikator
 UI.TI_Augmenter.FollowUpFailureModifier=Nachfolge-Misserfolgsmodifikator
 UI.TI_Augmenter.EMPTY=LEER
+UI.TI_Augmenter.HabResourcesDepleted=Resources Depleted
+UI.TI_Augmenter.HabResourcesDepletedHeadline={0} Resourced Depleted
+UI.TI_Augmenter.BaseSightedSummary=Resources has been depleted at {1} on {2}.
