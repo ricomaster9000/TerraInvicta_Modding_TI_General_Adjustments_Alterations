@@ -89,12 +89,10 @@ namespace TI_Augmenter
             if (Config.GetValueAsBool("agent_follow_up_success_failure_modifiers_enabled"))
             {
                 logDebug("agent_follow_up_success_failure_modifiers START");
-                TIMissionResolutionPatch.setConfigVariables();
                 var original2 = typeof(TIMissionResolution_Contested).GetMethod("GetAllModifiers");
                 var postfix2 = typeof(TIMissionResolutionPatch).GetMethod("GetAllModifiers_Postfix");
                 harmony.Patch(original2, null, new HarmonyMethod(postfix2));
 
-                TIMissionStatePatch.setConfigVariables();
                 var original6 = typeof(TIMissionState).GetMethod("ResolveMission");
                 var postfix6 = typeof(TIMissionStatePatch).GetMethod("ResolveMission_Postfix");
                 harmony.Patch(original6, null, new HarmonyMethod(postfix6));
@@ -117,7 +115,6 @@ namespace TI_Augmenter
             if (Config.GetValueAsBool("agent_attributes_alterations_enabled"))
             {
                 logDebug("agent_attributes_alterations START");
-                TICouncilorState_RandomizeStats_Patch.setConfigVariables();
                 var original = typeof(TICouncilorState).GetMethod("RandomizeStats");
                 var prefix = typeof(TICouncilorState_RandomizeStats_Patch).GetMethod("Prefix");
                 harmony.Patch(original, new HarmonyMethod(prefix));

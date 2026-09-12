@@ -6,16 +6,6 @@ namespace TI_Augmenter.augmentations.harmonypatches.councilorstate;
 
 public class TICouncilorState_HireRecruitCost_Patch
 {
-	private static float agent_attributes_cost_factor_multiplier = 1.00f;
-	
-	public static void setConfigVariables()
-	{
-		if (Config.isKeySet("agent_attributes_cost_factor_multiplier"))
-		{
-			agent_attributes_cost_factor_multiplier = Config.GetValueAsFloat("agent_attributes_cost_factor_multiplier");
-		}
-	}
-	
 	public static bool MaxRecruitableCandidatesPrefix(ref int __result)
 	{
 		__result = 12;
@@ -47,17 +37,11 @@ public class TICouncilorState_HireRecruitCost_Patch
 	private static float getTotalAttributeValuesContributingToCost(TICouncilorState councilor)
 	{
 		float result = 0;
+		float costFactorMultiplier = Config.GetValueAsFloat("agent_attributes_cost_factor_multiplier");
 		foreach (KeyValuePair<CouncilorAttribute,int> attribute in councilor.attributes)
 		{
-			result += attribute.Value * agent_attributes_cost_factor_multiplier;
+			result += attribute.Value * costFactorMultiplier;
 		}
 		return result;
-	}
-
-	private static List<T> GetEnumList<T>()
-	{
-		T[] array = (T[])Enum.GetValues(typeof(T));
-		List<T> list = new List<T>(array);
-		return list;
 	}
 }

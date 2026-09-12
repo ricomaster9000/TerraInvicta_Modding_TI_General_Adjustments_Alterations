@@ -129,24 +129,61 @@ namespace TI_Augmenter
             return _configValues;
         }
 
+        // Values are already typed by AddDataToConfigurationsList, so the getters unbox directly instead of
+        // round-tripping through ToString()/Parse (no allocations, safe to call from patches every time).
+        private static object GetRawValue(String jsonConfigKeyName)
+        {
+            object value;
+            if (!getConfigValues().TryGetValue(jsonConfigKeyName, out value))
+            {
+                throw new KeyNotFoundException("config key not set: " + jsonConfigKeyName);
+            }
+            return value;
+        }
+
         public static float GetValueAsFloat(String jsonConfigKeyName)
         {
-            float result;
-            if (!float.TryParse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+            object value = GetRawValue(jsonConfigKeyName);
+            switch (value)
             {
-                throw new InvalidCastException("could not cast value to float");
+                case float f: return f;
+                case int i: return i;
+                case string s when float.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out float parsed):
+                    return parsed;
+                default:
+                    throw new InvalidCastException("could not cast value of " + jsonConfigKeyName + " to float");
             }
-            return result;
+        }
+
+        public static float GetValueAsFloat(String jsonConfigKeyName, float defaultValue)
+        {
+            return isKeySet(jsonConfigKeyName) ? GetValueAsFloat(jsonConfigKeyName) : defaultValue;
         }
 
         public static int GetValueAsInt(String jsonConfigKeyName)
         {
-            return Int32.Parse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString());
+            object value = GetRawValue(jsonConfigKeyName);
+            switch (value)
+            {
+                case int i: return i;
+                case string s when int.TryParse(s, out int parsed):
+                    return parsed;
+                default:
+                    throw new InvalidCastException("could not cast value of " + jsonConfigKeyName + " to int");
+            }
         }
-        
+
         public static bool GetValueAsBool(String jsonConfigKeyName)
         {
-            return Boolean.Parse(getConfigValues().GetValueSafe(jsonConfigKeyName).ToString());
+            object value = GetRawValue(jsonConfigKeyName);
+            switch (value)
+            {
+                case bool b: return b;
+                case string s when bool.TryParse(s, out bool parsed):
+                    return parsed;
+                default:
+                    throw new InvalidCastException("could not cast value of " + jsonConfigKeyName + " to bool");
+            }
         }
 
         public static bool IsDebugModeActive()

@@ -6,25 +6,7 @@ namespace TI_Augmenter.augmentations.harmonypatches.councilorstate;
 
 public class TICouncilorState_RandomizeStats_Patch
 {
-	private static float agent_attributes_all_range_recruit_pool_modifier = 1.00f;
-	private static Dictionary<CouncilorAttribute,float> agent_attributes_range_recruit_pool_modifier_specific = new Dictionary<CouncilorAttribute, float>();
 	private static readonly Random Random = new Random();
-	
-	public static void setConfigVariables()
-	{
-		if (Config.isKeySet("agent_attributes_all_range_recruit_pool_modifier"))
-		{
-			agent_attributes_all_range_recruit_pool_modifier = Config.GetValueAsFloat("agent_attributes_all_range_recruit_pool_modifier");
-		}
-
-		foreach (CouncilorAttribute councilorAttribute in GetEnumList<CouncilorAttribute>())
-		{
-			if (Config.isKeySet("agent_attributes_" + councilorAttribute.ToString().ToLower() + "_range_recruit_pool_modifier"))
-			{
-				agent_attributes_range_recruit_pool_modifier_specific.Add(councilorAttribute, Config.GetValueAsFloat("agent_attributes_" + councilorAttribute.ToString().ToLower() + "_range_recruit_pool_modifier"));
-			}
-		}
-	}
 
 	public static bool Prefix(TICouncilorState __instance, bool forceBestStats)
 	{
@@ -64,19 +46,15 @@ public class TICouncilorState_RandomizeStats_Patch
 
 	private static int getModifierForAttribute(CouncilorAttribute attribute)
 	{
-		float result = agent_attributes_all_range_recruit_pool_modifier;
-		if (agent_attributes_range_recruit_pool_modifier_specific.ContainsKey(attribute))
+		float result = Config.GetValueAsFloat("agent_attributes_all_range_recruit_pool_modifier");
+		// optional per-attribute override, e.g. agent_attributes_investigation_range_recruit_pool_modifier
+		float specificModifier = Config.GetValueAsFloat("agent_attributes_" + attribute.ToString().ToLower() + "_range_recruit_pool_modifier", 1.00f);
+		if (specificModifier != 1.00f)
 		{
-			Main.logDebug("TICouncilorState_RandomizeStats_Patch - Prefix: applying new specific attribute maximum modifier that can be reached when recruiting specific-attribute-value-to-use: " + agent_attributes_range_recruit_pool_modifier_specific[attribute]);
-			result *= agent_attributes_range_recruit_pool_modifier_specific[attribute];
+			Main.logDebug("TICouncilorState_RandomizeStats_Patch - Prefix: applying new specific attribute maximum modifier that can be reached when recruiting specific-attribute-value-to-use: " + specificModifier);
+			result *= specificModifier;
 		}
 		Main.logDebug("TICouncilorState_RandomizeStats_Patch - Prefix: applying new maximum modifier attribute can be when recruiting agents: " + attribute + " result: " + result);
 		return (int) result;
-	}
-	private static List<T> GetEnumList<T>()
-	{
-		T[] array = (T[])Enum.GetValues(typeof(T));
-		List<T> list = new List<T>(array);
-		return list;
 	}
 }

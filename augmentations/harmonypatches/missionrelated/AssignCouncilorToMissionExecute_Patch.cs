@@ -11,12 +11,6 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated;
 public class AssignCouncilorToMission_Patch
 {
     public static Dictionary<String, List<MissionAlteration>> missionDecreaseAdjustmentsToApply = new Dictionary<string, List<MissionAlteration>>();
-    public static float mission_related_slider_operations_boost_modifier;
-
-    public static void setConfigVariables()
-    {
-        mission_related_slider_operations_boost_modifier = Config.GetValueAsFloat("mission_related_slider_operations_boost_modifier");
-    }
 
     public static void Execute_MissionSliderAdjustments_PostFix(AssignCouncilorToMission __instance)
     {
@@ -28,7 +22,7 @@ public class AssignCouncilorToMission_Patch
             activeMission.resources > 0)
         {
             string key = activeMission.missionTemplate.dataName + "_" + activeMission.targetLocation.ID;
-            float decreasyBy = (int)activeMission.resources * mission_related_slider_operations_boost_modifier;
+            float decreasyBy = (int)activeMission.resources * Config.GetValueAsFloat("mission_related_slider_operations_boost_modifier");
             Main.logDebug("AssignCouncilorToMission_Patch - Execute_MissionSliderAdjustments_PostFix - adding to protectMissionDifficultyIncreases value: " + decreasyBy + " key: " + key);
             if (!missionDecreaseAdjustmentsToApply.ContainsKey(key))
             {

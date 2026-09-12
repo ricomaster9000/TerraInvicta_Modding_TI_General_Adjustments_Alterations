@@ -5,20 +5,13 @@ namespace TI_Augmenter.augmentations.harmonypatches.missionrelated
 {
     public class TIMissionStatePatch
     {
-        public static int agent_follow_up_failures_decrease_chances_of_success_max_count = 0;
-        public static int agent_follow_up_successes_decrease_chances_of_success_max_count = 0;
-        
-        public static void setConfigVariables()
-        {
-            agent_follow_up_failures_decrease_chances_of_success_max_count = Config.GetValueAsInt("agent_follow_up_failures_decrease_chances_of_success_max_count");
-            agent_follow_up_successes_decrease_chances_of_success_max_count = Config.GetValueAsInt("agent_follow_up_successes_decrease_chances_of_success_max_count");
-        }
-
         public static void ResolveMission_Postfix(MissionResult __result)
         {
             if (__result.councilor != null && __result.missionTemplate != null && __result.target != null)
             {
                 String keyName = __result.councilor.ID + "_" + __result.missionTemplate.dataName + "_" + __result.target.ID;
+                int agent_follow_up_failures_decrease_chances_of_success_max_count = Config.GetValueAsInt("agent_follow_up_failures_decrease_chances_of_success_max_count");
+                int agent_follow_up_successes_decrease_chances_of_success_max_count = Config.GetValueAsInt("agent_follow_up_successes_decrease_chances_of_success_max_count");
                 if (__result.Failed)
                 {
                     Main.logDebug("TIMissionStatePatch - ResolveMission_Postfix: Handling mission failure of agent, AgentDetails: " + keyName + " " + __result.councilor.displayName);
