@@ -28,7 +28,8 @@ public class TICouncilorState_RandomizeStats_Patch
 
 	public static bool Prefix(TICouncilorState __instance, bool forceBestStats)
 	{
-		if (forceBestStats || Random.Next(1,2) == 2)
+		// Random.Next upper bound is exclusive: Next(0,2) yields 0 or 1, so roughly half of the pool keeps vanilla stats
+		if (forceBestStats || Random.Next(0,2) == 1)
 		{
 			return true;
 		}

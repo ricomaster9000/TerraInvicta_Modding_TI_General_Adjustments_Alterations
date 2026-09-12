@@ -16,6 +16,7 @@ using TI_Augmenter.augmentations.harmonypatches;
 using TI_Augmenter.augmentations.harmonypatches.councilorstate;
 using TI_Augmenter.augmentations.harmonypatches.factionstate;
 using TI_Augmenter.augmentations.harmonypatches.habsitestate;
+using TI_Augmenter.augmentations.harmonypatches.habitatsscreencontroller;
 using UnityEngine;
 using UnityModManagerNet;
 // ReSharper disable All
@@ -159,6 +160,11 @@ namespace TI_Augmenter
                 var original3 = typeof(GameControl).GetMethod("Initialize");
                 var postfix3 = typeof(TIHabSiteStateRandomizeSiteMiningDataPatch).GetMethod("InitializeGamePostfix");
                 harmony.Patch(original3, null,new HarmonyMethod(postfix3));
+
+                // PreviewBase is private, so resolve it through AccessTools rather than GetMethod
+                var original4 = AccessTools.Method(typeof(HabitatsScreenController), "PreviewBase");
+                var postfix4 = typeof(ResourceDepletion_PreviewBasePatch).GetMethod("PreviewBase_Postfix");
+                harmony.Patch(original4, null, new HarmonyMethod(postfix4));
                 logDebug("resource_depletion END");
             }
 
