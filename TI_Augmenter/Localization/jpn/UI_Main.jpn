@@ -1,6 +1,6 @@
 UI.TI_Augmenter.FollowUpSuccessModifier=フォローアップ成功修正値
 UI.TI_Augmenter.FollowUpFailureModifier=フォローアップ失敗修正値
 UI.TI_Augmenter.EMPTY=空
-UI.TI_Augmenter.HabResourcesDepleted=Resources Depleted
-UI.TI_Augmenter.HabResourcesDepletedHeadline={0} Resourced Depleted
-UI.TI_Augmenter.BaseSightedSummary=Resources has been depleted at {1} on {2}.
+UI.TI_Augmenter.HabResourcesDepleted=資源枯渇
+UI.TI_Augmenter.HabResourcesDepletedHeadline={0}の資源が枯渇
+UI.TI_Augmenter.BaseSightedSummary={2}の{1}における資源が枯渇しました。
