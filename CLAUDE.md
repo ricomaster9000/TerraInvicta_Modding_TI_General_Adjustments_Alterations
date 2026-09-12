@@ -41,7 +41,7 @@ augmentations/
     councilorstate/           RandomizeStats (stat range multipliers), HireRecruitCost (attribute-based influence cost)
     factionstate/             AddToCurrentResource (depletion bookkeeping), MissionControlContributionFromHabs (x4 MC)
     habsitestate/             RandomizeSiteMiningData — generates per-site finite resource totals (ResourceSiteTotalInfo)
-    habitatsscreencontroller/ Depletion-aware hab UI ("EMPTY" text) — NOT currently wired up in Main.cs
+    habitatsscreencontroller/ Postfix on HabitatsScreenController.PreviewBase — shows "EMPTY" for depleted resources
     missionrelated/           Follow-up success/failure modifiers, Protect-mission ops slider, DefenseMissionCostModifier
     nationstate/              Permanently remove control points on "Abandon Nation" (auto-renew) for the human player
     regionstate/              ApplyDamageToRegion — full reimplementation of nuclear damage with config multipliers
@@ -69,7 +69,6 @@ how_to_update/Capture.JPG     Screenshot of Discord advice on updating a Steam W
 - `ApplyDamageToRegionPatch.Prefix` copies the game's whole `ApplyDamageToRegion` body and returns `false`. When the game updates, this method is the most likely to drift from vanilla — re-diff it against the decompiled game code.
 - Game types come from `PavonisInteractive.TerraInvicta` namespace in `Assembly-CSharp.dll`; use a decompiler (dnSpy/ILSpy) on `import/Assembly-CSharp.dll` to inspect signatures before patching.
 - Some files carry stale namespaces (`TI_General_Adjustments_Alterations...`, `augmentations.core.missionrelated`) from before the rename to TI_Augmenter; harmless but don't propagate them.
-- Known quirk: `TICouncilorState_RandomizeStats_Patch.Prefix` intends to skip 50% of councilors via `Random.Next(1,2) == 2`, but `Next(1,2)` only ever returns 1, so all non-`forceBestStats` councilors are randomized.
 - Localization keys added by the mod must be added to **all nine** `UI_Main.*` files under `TI_Augmenter/Localization/`.
 
 ## Releasing
